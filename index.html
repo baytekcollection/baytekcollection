@@ -5,33 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Baytek Collection - Ultra Mağaza</title>
 <style>
-body {margin:0;font-family:'Poppins',sans-serif;background:#111;color:#fff;text-align:center;}
+body {margin:0;font-family:'Poppins',sans-serif;background:#111;color:#fff;text-align:center;overflow-x:hidden;}
 header {padding:50px 20px;background:linear-gradient(135deg,#000,#222);}
 .logo {width:120px;margin-bottom:10px;}
-h1 {font-size:40px;letter-spacing:3px;text-transform:uppercase;font-weight:800;color:#ff00ff;}
+h1 {font-size:40px;letter-spacing:3px;text-transform:uppercase;font-weight:800;color:#ff00ff;text-shadow:0 0 15px #ff00ff;}
 .btns a {display:inline-block;margin:10px;padding:12px 25px;background:#ff00ff;color:#fff;text-decoration:none;border-radius:8px;font-weight:700;box-shadow:0 0 15px #ff00ff;transition:0.3s;}
 .btns a:hover {background:#fff;color:#ff00ff;box-shadow:0 0 25px #fff;}
-.products {display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:30px 20px;}
-.product-card {background:#222;border-radius:12px;width:250px;padding:15px;box-shadow:0 0 15px #ff00ff;transition:transform 0.3s,box-shadow 0.3s;position:relative;overflow:hidden;}
-.product-card:hover {transform:scale(1.05);box-shadow:0 0 25px #ff00ff;}
-.product-card img {width:100%;border-radius:8px;margin-bottom:10px;transition:0.3s;}
-.product-card img:hover {transform:scale(1.05);}
+.products {display:flex;flex-wrap:wrap;justify-content:center;gap:25px;padding:30px 20px;perspective:1200px;}
+.product-card {background:#222;border-radius:12px;width:260px;padding:15px;box-shadow:0 0 15px #ff00ff;transition:transform 0.5s,box-shadow 0.5s;position:relative;overflow:hidden;cursor:pointer;}
+.product-card:hover {transform:scale(1.08) rotateY(5deg);box-shadow:0 0 40px #ff00ff;}
+.product-card img {width:100%;border-radius:8px;margin-bottom:10px;transition:0.5s;}
+.product-card img:hover {transform:scale(1.07);}
 .product-card h3 {font-size:18px;margin:10px 0 5px;}
 .product-card p {font-size:14px;color:#ccc;}
 .product-card strong {color:#ff00ff;display:block;margin:10px 0;font-size:16px;}
 .product-card input,.product-card select {padding:5px;width:80%;margin-bottom:10px;border-radius:5px;border:none;font-size:14px;}
 .product-card button {padding:8px 15px;background:#ff00ff;border:none;color:#fff;font-weight:700;border-radius:8px;cursor:pointer;transition:0.3s;}
-.product-card button:hover {background:#fff;color:#ff00ff;}
-#cart-icon {position:fixed;top:20px;right:20px;background:#ff00ff;color:#111;padding:10px;border-radius:50%;width:50px;height:50px;display:flex;justify-content:center;align-items:center;cursor:pointer;z-index:1000;box-shadow:0 0 15px #ff00ff;}
+.product-card button:hover {background:#fff;color:#ff00ff;transform:scale(1.05);}
+#cart-icon {position:fixed;top:20px;right:20px;background:#ff00ff;color:#111;padding:10px;border-radius:50%;width:50px;height:50px;display:flex;justify-content:center;align-items:center;cursor:pointer;z-index:1000;box-shadow:0 0 20px #ff00ff;}
 #cart-icon span {font-weight:700;}
-#cart {position:fixed;right:20px;top:80px;background:#222;border-radius:12px;padding:15px;width:320px;max-height:80vh;overflow-y:auto;box-shadow:0 0 15px #ff00ff;display:none;z-index:999;}
+#cart {position:fixed;right:20px;top:80px;background:#222;border-radius:12px;padding:15px;width:360px;max-height:80vh;overflow-y:auto;box-shadow:0 0 25px #ff00ff;display:none;z-index:999;transition:0.5s;}
 #cart h2 {margin-top:0;color:#ff00ff;display:flex;justify-content:space-between;align-items:center;}
 #cart ul {list-style:none;padding:0;margin:0;}
 #cart li {margin-bottom:8px;font-size:14px;display:flex;justify-content:space-between;align-items:center;}
 .remove-item {cursor:pointer;color:#ff00ff;font-weight:700;margin-left:5px;}
 #checkout {margin-top:10px;padding:10px;width:100%;background:#ff00ff;border:none;border-radius:8px;font-weight:700;cursor:pointer;}
 #checkout:hover {background:#fff;color:#ff00ff;}
-.added-popup {position:absolute;top:10px;left:50%;transform:translateX(-50%);background:#ff00ff;color:#111;padding:5px 10px;border-radius:5px;font-size:12px;display:none;}
+.added-popup {position:absolute;top:10px;left:50%;transform:translateX(-50%);background:#ff00ff;color:#111;padding:5px 10px;border-radius:5px;font-size:12px;display:none;animation:popupAnim 0.6s;}
+@keyframes popupAnim {0%{opacity:0;transform:translate(-50%,-10px);}50%{opacity:1;transform:translate(-50%,0);}100%{opacity:0;transform:translate(-50%,-10px);}}
+.color-option {display:inline-block;margin:3px;padding:5px 10px;border-radius:5px;background:#ff00ff;color:#111;cursor:pointer;transition:0.3s;}
+.color-option.selected {box-shadow:0 0 15px #ff00ff;}
 </style>
 </head>
 <body>
@@ -51,15 +54,15 @@ h1 {font-size:40px;letter-spacing:3px;text-transform:uppercase;font-weight:800;c
 
 <section class="products">
 
-<div class="product-card" data-name="Kartal figürlü LED ışıklı su şelalesi" data-price="1200">
+<!-- 1. Ürün -->
+<div class="product-card" data-name="Kartal figürlü LED ışıklı su şelalesi" data-price="1200" data-max="24">
 <div class="added-popup">✅ Sepete eklendi!</div>
 <img src="https://i.imgur.com/aIAthmX.jpeg" alt="">
 <h3>Kartal figürlü LED ışıklı su şelalesi</h3>
-<p>Seçenekli figürler: 1 adet Fil Figürlü veya 2 adet Fil Figürlü</p>
-<strong>1200₺</strong>
+<p>Figür seçenekleri: 1 adet Fil, 2 adet Fil</p>
 <select class="color-select">
-<option value="1 adet Fil Figürlü">1 adet Fil Figürlü</option>
-<option value="2 adet Fil Figürlü">2 adet Fil Figürlü</option>
+<option value="1 adet Fil">1 adet Fil</option>
+<option value="2 adet Fil">2 adet Fil</option>
 </select>
 <select>
 <option value="MNG - Standart">MNG - Standart</option>
@@ -75,12 +78,12 @@ h1 {font-size:40px;letter-spacing:3px;text-transform:uppercase;font-weight:800;c
 <button>Add to Cart</button>
 </div>
 
-<div class="product-card" data-name="3 Bardaklı Vakumlu Termos Seti" data-price="450">
+<!-- 2. Ürün -->
+<div class="product-card" data-name="3 Bardaklı Vakumlu Termos Seti" data-price="450" data-max="24">
 <div class="added-popup">✅ Sepete eklendi!</div>
 <img src="https://i.imgur.com/wvdZXrC.jpeg" alt="">
 <h3>3 Bardaklı Vakumlu Termos Seti</h3>
 <p>Renk seçenekleri: Su Yeşili, Mor, Siyah</p>
-<strong>450₺</strong>
 <select class="color-select">
 <option value="Su Yeşili">Su Yeşili</option>
 <option value="Mor">Mor</option>
@@ -100,12 +103,12 @@ h1 {font-size:40px;letter-spacing:3px;text-transform:uppercase;font-weight:800;c
 <button>Add to Cart</button>
 </div>
 
-<div class="product-card" data-name="Mobgift USB’li Işıklı Ahşap Standlı Cam Küre" data-price="200">
+<!-- 3. Ürün -->
+<div class="product-card" data-name="Mobgift USB’li Işıklı Ahşap Standlı Cam Küre" data-price="200" data-max="52">
 <div class="added-popup">✅ Sepete eklendi!</div>
 <img src="https://i.imgur.com/oiAFO7w.jpeg" alt="">
 <h3>Mobgift USB’li Işıklı Ahşap Standlı Cam Küre</h3>
 <p>Figür seçenekleri: Astronot, Melek, Galaksi</p>
-<strong>200₺</strong>
 <select class="color-select">
 <option value="Astronot">Astronot</option>
 <option value="Melek">Melek</option>
@@ -148,7 +151,7 @@ const card=btn.parentElement;
 const name=card.getAttribute('data-name');
 const price=Number(card.getAttribute('data-price'));
 let quantity=Number(card.querySelector('input').value);
-const max=Number(card.querySelector('input').max);
+const max=Number(card.getAttribute('data-max'));
 if(quantity>max) quantity=max;
 const shipping=card.querySelector('select:nth-of-type(2)').value;
 const color=card.querySelector('.color-select').value;
@@ -159,7 +162,6 @@ else{cart.push({name,price,quantity,shipping,color});}
 
 updateCart();
 
-// Popup
 const popup=card.querySelector('.added-popup');
 popup.style.display='block';
 setTimeout(()=>{popup.style.display='none';},1000);

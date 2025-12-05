@@ -1,150 +1,245 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baytek Collection</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #000000, #222222);
-            color: #fff;
-            text-align: center;
-        }
-        header {
-            padding: 60px 20px;
-        }
-        .logo {
-            width: 150px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            font-size: 45px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-weight: 800;
-            animation: glow 2s infinite alternate;
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #ff00ff; }
-            to { text-shadow: 0 0 25px #ff00ff; }
-        }
-        .tagline {
-            font-size: 18px;
-            margin-top: -10px;
-            color: #d1d1d1;
-        }
-        .btns {
-            margin-top: 30px;
-        }
-        .btn {
-            display: inline-block;
-            margin: 10px;
-            padding: 15px 30px;
-            background: #ff00ff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            transition: 0.3s;
-            box-shadow: 0 0 15px #ff00ff;
-        }
-        .btn:hover {
-            background: #ffffff;
-            color: #ff00ff;
-            box-shadow: 0 0 25px #ffffff;
-        }
-        .products {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            padding: 40px 20px;
-        }
-        .product-card {
-            background: #111;
-            padding: 20px;
-            border-radius: 12px;
-            width: 250px;
-            box-shadow: 0 0 15px #ff00ff;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .product-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px #ff00ff;
-        }
-        .product-card img {
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        .product-card h3 {
-            margin: 0;
-            font-size: 20px;
-        }
-        .product-card p {
-            font-size: 14px;
-            color: #ccc;
-        }
-        .product-card strong {
-            display: block;
-            margin-top: 10px;
-            font-size: 18px;
-            color: #ff00ff;
-        }
-        footer {
-            margin-top: 60px;
-            padding: 20px;
-            font-size: 14px;
-            color: #7d7d7d;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baytek Collection - Mağaza</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: #111;
+        color: #fff;
+        text-align: center;
+    }
+    header {
+        padding: 50px 20px;
+        background: linear-gradient(135deg, #000, #222);
+    }
+    .logo {
+        width: 120px;
+        margin-bottom: 10px;
+    }
+    h1 {
+        font-size: 40px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-weight: 800;
+        color: #ff00ff;
+    }
+    .btns a {
+        display: inline-block;
+        margin: 10px;
+        padding: 12px 25px;
+        background: #ff00ff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 700;
+        box-shadow: 0 0 15px #ff00ff;
+        transition: 0.3s;
+    }
+    .btns a:hover {
+        background: #fff;
+        color: #ff00ff;
+        box-shadow: 0 0 25px #fff;
+    }
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+        padding: 30px 20px;
+    }
+    .product-card {
+        background: #222;
+        border-radius: 12px;
+        width: 250px;
+        padding: 15px;
+        box-shadow: 0 0 15px #ff00ff;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px #ff00ff;
+    }
+    .product-card img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+    .product-card h3 {
+        font-size: 18px;
+        margin: 10px 0 5px;
+    }
+    .product-card p {
+        font-size: 14px;
+        color: #ccc;
+    }
+    .product-card strong {
+        color: #ff00ff;
+        display: block;
+        margin: 10px 0;
+        font-size: 16px;
+    }
+    .product-card input, .product-card select {
+        padding: 5px;
+        width: 80%;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: none;
+        font-size: 14px;
+    }
+    .product-card button {
+        padding: 8px 15px;
+        background: #ff00ff;
+        border: none;
+        color: #fff;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .product-card button:hover {
+        background: #fff;
+        color: #ff00ff;
+    }
+    #cart {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        background: #222;
+        border-radius: 12px;
+        padding: 15px;
+        width: 280px;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 0 15px #ff00ff;
+    }
+    #cart h2 {
+        margin-top: 0;
+        color: #ff00ff;
+    }
+    #cart ul {
+        list-style: none;
+        padding: 0;
+    }
+    #cart li {
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+    #checkout {
+        margin-top: 10px;
+        padding: 10px;
+        width: 100%;
+        background: #ff00ff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    #checkout:hover {
+        background: #fff;
+        color: #ff00ff;
+    }
+</style>
 </head>
 <body>
 
 <header>
-    <!-- Logo -->
     <img class="logo" src="https://i.imgur.com/Xcka2e9.jpeg" alt="Baytek Collection Logo">
-
     <h1>Baytek Collection</h1>
     <p class="tagline">Tarzın Yeni Merkezi – Kalite, Şıklık ve Etki Bir Arada</p>
-
     <div class="btns">
-        <a class="btn" href="https://instagram.com/baytekcollection" target="_blank">📸 Instagram</a>
-        <a class="btn" href="https://wa.me/905334772649" target="_blank">KERİM BAYRAKTAR</a>
-        <a class="btn" href="https://wa.me/905511122791" target="_blank">ENES TEKİN</a>
+        <a href="https://instagram.com/baytekcollection" target="_blank">📸 Instagram</a>
+        <a href="https://wa.me/905334772649" target="_blank">KERİM BAYRAKTAR</a>
+        <a href="https://wa.me/905511122791" target="_blank">ENES TEKİN</a>
     </div>
 </header>
 
 <section class="products">
-    <div class="product-card">
-        <img src="https://i.imgur.com/aIAthmX.jpeg" alt="Kartal figürlü LED ışıklı su şelalesi">
+    <div class="product-card" data-name="Kartal figürlü LED ışıklı su şelalesi" data-price="1200">
+        <img src="https://i.imgur.com/aIAthmX.jpeg" alt="">
         <h3>Kartal figürlü LED ışıklı su şelalesi</h3>
         <p>Şık tasarım, LED ışıklı ve dekoratif su şelalesi.</p>
-        <strong>Fiyat: 1200₺</strong>
+        <strong>1200₺</strong>
+        <input type="number" value="1" min="1">
+        <select>
+            <option value="Standart Kargo">Standart Kargo</option>
+            <option value="Hızlı Kargo">Hızlı Kargo</option>
+        </select>
+        <button>Add to Cart</button>
     </div>
 
-    <div class="product-card">
-        <img src="https://i.imgur.com/wvdZXrC.jpeg" alt="3 Bardaklı Vakumlu Termos Seti">
+    <div class="product-card" data-name="3 Bardaklı Vakumlu Termos Seti" data-price="450">
+        <img src="https://i.imgur.com/wvdZXrC.jpeg" alt="">
         <h3>3 Bardaklı Vakumlu Termos Seti</h3>
-        <p>Ürünün türü (vakum termos, su matarası vs.), hacmi/kapasitesi, renk/tema, öne çıkan özellikler (ısıyı uzun süre koruma, taşınabilirlik, paslanmaz çelik, vs.), kullanıcıya hitap eden faydalar (kahve severler, seyahat, outdoor, vs.)</p>
-        <strong>Fiyat: 450₺</strong>
+        <p>Taşınabilir, paslanmaz çelik ve ısıyı korur.</p>
+        <strong>450₺</strong>
+        <input type="number" value="1" min="1">
+        <select>
+            <option value="Standart Kargo">Standart Kargo</option>
+            <option value="Hızlı Kargo">Hızlı Kargo</option>
+        </select>
+        <button>Add to Cart</button>
     </div>
 
-    <div class="product-card">
-        <img src="https://i.imgur.com/oiAFO7w.jpeg" alt="Mobgift USB’li Işıklı Ahşap Standlı Cam Küre">
+    <div class="product-card" data-name="Mobgift USB’li Işıklı Ahşap Standlı Cam Küre" data-price="200">
+        <img src="https://i.imgur.com/oiAFO7w.jpeg" alt="">
         <h3>Mobgift USB’li Işıklı Ahşap Standlı Cam Küre</h3>
-        <p>Mobgift USB’li Işıklı Ahşap Standlı Cam Küre ile masanızı ya da odanızı büyüleyici bir atmosfere dönüştürün! Şık ahşap standı ve kristal cam yapısıyla modern dekorasyonun vazgeçilmezi olacak bu küre, hem göz alıcı hem de fonksiyonel.</p>
-        <strong>Fiyat: 200₺</strong>
+        <p>Şık ahşap stand ve kristal cam yapısı.</p>
+        <strong>200₺</strong>
+        <input type="number" value="1" min="1">
+        <select>
+            <option value="Standart Kargo">Standart Kargo</option>
+            <option value="Hızlı Kargo">Hızlı Kargo</option>
+        </select>
+        <button>Add to Cart</button>
     </div>
 </section>
 
-<footer>
-    © 2025 Baytek Collection – Tüm Hakları Saklıdır.
-</footer>
+<div id="cart">
+    <h2>Sepet</h2>
+    <ul></ul>
+    <button id="checkout">Sipariş Geç</button>
+</div>
+
+<script>
+let cart = [];
+
+document.querySelectorAll('.product-card button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const card = btn.parentElement;
+        const name = card.getAttribute('data-name');
+        const price = Number(card.getAttribute('data-price'));
+        const quantity = Number(card.querySelector('input').value);
+        const shipping = card.querySelector('select').value;
+
+        cart.push({name, price, quantity, shipping});
+        updateCart();
+    });
+});
+
+function updateCart() {
+    const ul = document.querySelector('#cart ul');
+    ul.innerHTML = '';
+    cart.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} x${item.quantity} (${item.shipping}) - ${item.price*item.quantity}₺`;
+        ul.appendChild(li);
+    });
+}
+
+document.querySelector('#checkout').addEventListener('click', () => {
+    if(cart.length === 0) return alert('Sepetiniz boş!');
+    let message = 'Merhaba, sipariş vermek istiyorum:%0A';
+    cart.forEach(item => {
+        message += `• ${item.name} x${item.quantity} (${item.shipping}) - ${item.price*item.quantity}₺%0A`;
+    });
+    const url = 'https://wa.me/905334772649?text=' + message;
+    window.open(url, '_blank');
+});
+</script>
 
 </body>
 </html>

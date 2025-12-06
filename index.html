@@ -58,7 +58,7 @@ h1{font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;co
 
 <section class="products">
 
-<!-- 1. Ürün -->
+<!-- Ürünler (4 adet) -->
 <div class="product-card" data-name="Kartal figürlü LED ışıklı su şelalesi" data-price="1200" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41882654">
 <div class="discount">%10 İNDİRİM</div>
 <div class="added-popup">✅ Sepete eklendi!</div>
@@ -83,7 +83,6 @@ h1{font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;co
 <button>Sepete Ekle</button>
 </div>
 
-<!-- 2. Ürün -->
 <div class="product-card" data-name="3 Bardaklı Vakumlu Termos Seti" data-price="450" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41884160">
 <div class="discount">%5 İNDİRİM</div>
 <div class="added-popup">✅ Sepete eklendi!</div>
@@ -109,7 +108,6 @@ h1{font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;co
 <button>Sepete Ekle</button>
 </div>
 
-<!-- 3. Ürün -->
 <div class="product-card" data-name="Mobgift USB’li Işıklı Ahşap Standlı Cam Küre" data-price="200" data-max="52" data-shopier="https://www.shopier.com/baytekcollection/41884313">
 <div class="added-popup">✅ Sepete eklendi!</div>
 <img src="https://i.imgur.com/oiAFO7w.jpeg" alt="">
@@ -134,7 +132,6 @@ h1{font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;co
 <button>Sepete Ekle</button>
 </div>
 
-<!-- 4. Ürün -->
 <div class="product-card" data-name="3’lü Motivasyonel Su Matarası" data-price="350" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41884046">
 <div class="added-popup">✅ Sepete eklendi!</div>
 <img src="https://i.imgur.com/2en5c9l.jpeg" alt="">
@@ -246,24 +243,14 @@ function updateCart(){
   });
 }
 
-// Checkout işlemi (sipariş sonrası)
+// Checkout
 document.getElementById('checkout').addEventListener('click',()=>{
   if(cart.length===0){alert('Sepet boş!'); return;}
-  // WhatsApp bildirimi
-  let messages=[];
-  let shopierLinks=[];
-  cart.forEach(item=>{
-    messages.push(`${item.name} x${item.quantity}, Renk: ${item.color}, Kargo: ${item.shipping}`);
-    shopierLinks.push(item.shopier);
-  });
-  const wpMsg=encodeURIComponent("Yeni Sipariş!\n"+messages.join("\n"));
-  window.open(`https://wa.me/${whatsappNumber}?text=${wpMsg}`,'_blank');
-
-  // Shopier yönlendirme
-  shopierLinks.forEach(link=>window.open(link,'_blank'));
-
-  cart=[]; updateCart();
-  alert('Siparişiniz işleme alındı, yönlendiriliyorsunuz!');
+  // Shopier linklerini aç
+  cart.forEach(item=>window.open(item.shopier,'_blank'));
+  alert('Shopier ödeme sayfasına yönlendirildiniz. Ödeme tamamlandıktan sonra size WhatsApp bildirimi gelir.');
+  cart=[];
+  updateCart();
 });
 </script>
 

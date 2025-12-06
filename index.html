@@ -5,93 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Baytek Collection - Ultra Mağaza</title>
 <style>
-body {
-  margin:0; font-family:'Poppins',sans-serif; background:#111; color:#fff;
-  text-align:center; overflow-x:hidden; position:relative;
-}
-/* Header */
-header {
-  padding:50px 20px; background:linear-gradient(135deg,#000,#222); position:relative; z-index:5;
-}
+body {margin:0; font-family:'Poppins',sans-serif; background:#111; color:#fff; text-align:center; overflow-x:hidden; position:relative;}
+header {padding:50px 20px; background:linear-gradient(135deg,#000,#222); position:relative; z-index:5;}
 .logo {width:120px;margin-bottom:10px;}
-h1 {font-size:42px; letter-spacing:3px; text-transform:uppercase; font-weight:800;
-color:#ff00ff; text-shadow:0 0 20px #ff00ff;}
-.btns a {
-  display:inline-block;margin:10px;padding:12px 25px;background:#ff00ff;color:#111;
-  text-decoration:none;border-radius:8px;font-weight:700;box-shadow:0 0 15px #ff00ff;transition:0.3s;
-}
+h1 {font-size:42px; letter-spacing:3px; text-transform:uppercase; font-weight:800; color:#ff00ff; text-shadow:0 0 20px #ff00ff;}
+.btns a {display:inline-block;margin:10px;padding:12px 25px;background:#ff00ff;color:#111;text-decoration:none;border-radius:8px;font-weight:700;box-shadow:0 0 15px #ff00ff;transition:0.3s;}
 .btns a:hover {background:#fff;color:#ff00ff;box-shadow:0 0 35px #ff00ff;transform:scale(1.05);}
 .tagline {font-size:16px;color:#ccc;margin-top:5px;}
-
-/* Products */
-.products {
-  display:flex;flex-wrap:wrap;justify-content:center;gap:30px;padding:40px 20px;perspective:1200px;
-}
-.product-card {
-  background:#222;border-radius:15px;width:260px;padding:20px;
-  box-shadow:0 0 15px #ff00ff;transition:transform 0.5s,box-shadow 0.5s;
-  position:relative;overflow:hidden;cursor:pointer;
-}
+.products {display:flex;flex-wrap:wrap;justify-content:center;gap:30px;padding:40px 20px;perspective:1200px;}
+.product-card {background:#222;border-radius:15px;width:260px;padding:20px;box-shadow:0 0 15px #ff00ff;transition:transform 0.5s,box-shadow 0.5s; position:relative;overflow:hidden;cursor:pointer;}
 .product-card:hover {transform:scale(1.08) rotateY(5deg) translateY(-5px);box-shadow:0 0 50px #ff00ff;}
 .product-card img {width:100%;border-radius:10px;margin-bottom:12px;transition:0.5s;}
 .product-card img:hover {transform:scale(1.1) rotate(2deg);}
 .product-card h3 {font-size:19px;margin:10px 0 5px;}
 .product-card p {font-size:14px;color:#ccc;}
 .product-card strong {color:#ff00ff;display:block;margin:10px 0;font-size:17px;}
-.product-card input,.product-card select {
-  padding:5px;width:80%;margin-bottom:10px;border-radius:5px;border:none;font-size:14px;
-}
-.product-card button {
-  padding:10px 18px;background:#ff00ff;border:none;color:#111;font-weight:700;
-  border-radius:8px;cursor:pointer;transition:0.3s;box-shadow:0 0 10px #ff00ff;
-}
+.product-card input,.product-card select {padding:5px;width:80%;margin-bottom:10px;border-radius:5px;border:none;font-size:14px;}
+.product-card button {padding:10px 18px;background:#ff00ff;border:none;color:#111;font-weight:700;border-radius:8px;cursor:pointer;transition:0.3s;box-shadow:0 0 10px #ff00ff;}
 .product-card button:hover {background:#fff;color:#ff00ff;transform:scale(1.07);}
-
-/* Cart */
-#cart-icon {
-  position:fixed;top:20px;right:20px;background:#ff00ff;color:#111;
-  padding:12px;border-radius:50%;width:55px;height:55px;display:flex;
-  justify-content:center;align-items:center;cursor:pointer;z-index:1000;
-  box-shadow:0 0 30px #ff00ff;animation:glowCart 2s infinite alternate;
-}
+#cart-icon {position:fixed;top:20px;right:20px;background:#ff00ff;color:#111;padding:12px;border-radius:50%;width:55px;height:55px;display:flex;justify-content:center;align-items:center;cursor:pointer;z-index:1000;box-shadow:0 0 30px #ff00ff;animation:glowCart 2s infinite alternate;}
 #cart-icon span {font-weight:700;}
 @keyframes glowCart {0%{box-shadow:0 0 30px #ff00ff;}50%{box-shadow:0 0 50px #ff00ff;}100%{box-shadow:0 0 30px #ff00ff;}}
-#cart {
-  position:fixed;right:20px;top:90px;background:#222;border-radius:15px;padding:20px;
-  width:380px;max-height:80vh;overflow-y:auto;box-shadow:0 0 40px #ff00ff;
-  display:none;z-index:999;transition:0.5s;
-}
+#cart {position:fixed;right:20px;top:90px;background:#222;border-radius:15px;padding:20px;width:380px;max-height:80vh;overflow-y:auto;box-shadow:0 0 40px #ff00ff;display:none;z-index:999;transition:0.5s;}
 #cart h2 {margin-top:0;color:#ff00ff;display:flex;justify-content:space-between;align-items:center;}
 #cart ul {list-style:none;padding:0;margin:0;}
 #cart li {margin-bottom:8px;font-size:14px;display:flex;justify-content:space-between;align-items:center;transition:0.3s;}
 .remove-item {cursor:pointer;color:#ff00ff;font-weight:700;margin-left:5px;}
-#checkout {
-  margin-top:12px;padding:12px;width:100%;background:#ff00ff;border:none;border-radius:8px;
-  font-weight:700;cursor:pointer;box-shadow:0 0 15px #ff00ff;
-}
+#checkout {margin-top:12px;padding:12px;width:100%;background:#ff00ff;border:none;border-radius:8px;font-weight:700;cursor:pointer;box-shadow:0 0 15px #ff00ff;}
 #checkout:hover {background:#fff;color:#ff00ff;transform:scale(1.03);}
-.added-popup {
-  position:absolute;top:10px;left:50%;transform:translateX(-50%);
-  background:#ff00ff;color:#111;padding:5px 12px;border-radius:6px;font-size:13px;
-  display:none;animation:popupAnim 0.6s;
-}
+.added-popup {position:absolute;top:10px;left:50%;transform:translateX(-50%);background:#ff00ff;color:#111;padding:5px 12px;border-radius:6px;font-size:13px;display:none;animation:popupAnim 0.6s;}
 @keyframes popupAnim {0%{opacity:0;transform:translate(-50%,-10px);}50%{opacity:1;transform:translate(-50%,0);}100%{opacity:0;transform:translate(-50%,-10px);}}
 .color-select {display:inline-block;margin:3px;padding:5px 10px;border-radius:5px;background:#ff00ff;color:#111;cursor:pointer;transition:0.3s;}
 .color-select.selected {box-shadow:0 0 20px #ff00ff;}
-
-/* Arka plan animasyonu */
 #animation-container {position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
-
-/* Discount stickers */
 .discount {position:absolute;top:10px;right:10px;background:red;color:#fff;padding:5px 8px;border-radius:6px;font-size:13px;font-weight:700;}
-
-/* Son sipariş popup */
-#last-order-popup {
-  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
-  background:#ff00ff;color:#111;padding:10px 18px;border-radius:10px;
-  font-weight:700;box-shadow:0 0 15px #ff00ff;display:none;animation:popupAnim 0.5s;
-  z-index:1001;
-}
+#last-order-popup {position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#ff00ff;color:#111;padding:10px 18px;border-radius:10px;font-weight:700;box-shadow:0 0 15px #ff00ff;display:none;animation:popupAnim 0.5s; z-index:1001;}
 </style>
 </head>
 <body>
@@ -210,10 +158,10 @@ color:#ff00ff; text-shadow:0 0 20px #ff00ff;}
 <button>Sepete Ekle</button>
 </div>
 
-<!-- 5. Ürün (Yeni) -->
+<!-- 5. Ürün -->
 <div class="product-card" data-name="3'lü Pipetli Motivasyonel Su Matarası" data-price="400" data-max="2">
 <div class="added-popup">✅ Sepete eklendi!</div>
-<img src="blob:https://imgur.com/342c66d4-2f42-4246-bca5-9f7a7e0273b1" alt="">
+<img src="https://i.imgur.com/2en5c9l.jpeg" alt="">
 <h3>3'lü Pipetli Motivasyonel Su Matarası</h3>
 <p>Renk: Siyah</p>
 <select class="color-select">
@@ -245,7 +193,7 @@ color:#ff00ff; text-shadow:0 0 20px #ff00ff;}
 <div id="animation-container"></div>
 
 <script>
-// Arka plan hareketli cisimler
+// Arka plan animasyonu
 const animContainer = document.getElementById('animation-container');
 for(let i=0;i<50;i++){
   const div=document.createElement('div');
@@ -263,7 +211,7 @@ for(let i=0;i<50;i++){
   document.head.appendChild(style);
 }
 
-// Sepet işlemleri
+// Sepet ve Shopier / WhatsApp
 let cart=[];
 const cartIcon=document.getElementById('cart-icon');
 const cartCount=document.getElementById('cart-count');
@@ -272,6 +220,16 @@ const cartTotal=document.getElementById('cart-total');
 const lastPopup=document.getElementById('last-order-popup');
 
 cartIcon.addEventListener('click',()=>{cartDiv.style.display=cartDiv.style.display==='none'?'block':'none';});
+
+const shopierLinks = {
+  "Kartal figürlü LED ışıklı su şelalesi": "https://www.shopier.com/s/urun1",
+  "3 Bardaklı Vakumlu Termos Seti": "https://www.shopier.com/s/urun2",
+  "Mobgift USB’li Işıklı Ahşap Standlı Cam Küre": "https://www.shopier.com/s/urun3",
+  "3’lü Motivasyonel Su Matarası": "https://www.shopier.com/s/urun4",
+  "3'lü Pipetli Motivasyonel Su Matarası": "https://www.shopier.com/s/urun5"
+};
+
+const myWhatsAppNumber = "905334772649";
 
 document.querySelectorAll('.product-card button').forEach(btn=>{
 btn.addEventListener('click',()=>{
@@ -290,14 +248,25 @@ else{cart.push({name,price,quantity,shipping,color});}
 
 updateCart();
 
+// Popup
 const popup=card.querySelector('.added-popup');
 popup.style.display='block';
 setTimeout(()=>{popup.style.display='none';},1000);
 
-// Son sipariş bildirimi
+// Son sipariş popup
 lastPopup.textContent=`${name} sepete eklendi!`;
 lastPopup.style.display='block';
 setTimeout(()=>{lastPopup.style.display='none';},2000);
+
+// WhatsApp bildirimi
+const message = encodeURIComponent(`Yeni Sipariş!\nÜrün: ${name}\nAdet: ${quantity}\nRenk/Model: ${color}\nKargo: ${shipping}`);
+window.open(`https://wa.me/${myWhatsAppNumber}?text=${message}`, '_blank');
+
+// Shopier yönlendirme
+const shopierLink = shopierLinks[name];
+if(shopierLink){
+  setTimeout(()=>{ window.location.href = shopierLink; }, 2000);
+}
 });
 });
 
@@ -321,7 +290,6 @@ rm.addEventListener('click',()=>{
 });
 });
 }
-
 </script>
 
 </body>

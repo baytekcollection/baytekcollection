@@ -36,7 +36,6 @@ h1 {font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;c
 @keyframes popupAnim {0%{opacity:0;transform:translate(-50%,-10px);}50%{opacity:1;transform:translate(-50%,0);}100%{opacity:0;transform:translate(-50%,-10px);}}
 .color-option {display:inline-block;margin:3px;padding:5px 10px;border-radius:5px;background:#ff00ff;color:#111;cursor:pointer;transition:0.3s;}
 .color-option.selected {box-shadow:0 0 20px #ff00ff;}
-/* Parallax background effect */
 body::before {content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:url('https://i.imgur.com/5U3F9jA.jpg') center/cover no-repeat;opacity:0.05;z-index:-1;transition:transform 0.3s;}
 body:hover::before {transform:scale(1.02);}
 </style>
@@ -133,9 +132,9 @@ body:hover::before {transform:scale(1.02);}
 </div>
 
 <!-- 4. Ürün -->
-<div class="product-card" data-name="3’lü Motivasyonel Su Matarası, 2 Litre 750 Ml 300 Ml BPA İçermez Suluk" data-price="350" data-max="24" data-shopier="https://shopier.com/baytekcollection/41884046">
+<div class="product-card" data-name="3’lü Motivasyonel Su Matarası" data-price="350" data-max="24" data-shopier="https://shopier.com/baytekcollection/41884046">
 <div class="added-popup">✅ Sepete eklendi!</div>
-<img src="https://i.imgur.com/iseyCZu.jpeg" alt="3’lü Motivasyonel Su Matarası">
+<img src="https://i.imgur.com/iseyCZu.jpeg" alt="">
 <h3>3’lü Motivasyonel Su Matarası, 2 Litre 750 Ml 300 Ml BPA İçermez Suluk</h3>
 <p>Renk seçenekleri: Siyah</p>
 <select class="color-select">
@@ -160,7 +159,7 @@ body:hover::before {transform:scale(1.02);}
 <div id="cart">
 <h2>Sepet <span id="cart-total">0₺</span></h2>
 <ul></ul>
-<button id="checkout">Sipariş Geç</button>
+<button id="checkout">Ödeme Yap</button>
 </div>
 
 <script>
@@ -185,7 +184,7 @@ const color=card.querySelector('.color-select').value;
 const shopier=card.getAttribute('data-shopier');
 
 const exists=cart.find(i=>i.name===name && i.color===color && i.shipping===shipping);
-if(exists){exists.quantity+=quantity;if(exists.quantity>max) exists.quantity=max;}
+if(exists){exists.quantity+=quantity;if(exists.quantity>max) exists.quantity=max;exists.shopier=shopier;}
 else{cart.push({name,price,quantity,shipping,color,shopier});}
 
 updateCart();
@@ -218,11 +217,21 @@ updateCart();
 
 document.querySelector('#checkout').addEventListener('click',()=>{
 if(cart.length===0)return alert('Sepetiniz boş!');
-let message='Merhaba, sipariş vermek istiyorum:%0A';
+let shopierUrl = 'https://shopier.com/baytekcollection/cart?products=';
+let productsParam = cart.map(item=>`${item.shopier}&quantity=${item.quantity}`).join(',');
+window.open(shopierUrl+encodeURIComponent(productsParam),'_blank');
+
+// Ödeme sonrası WhatsApp yönlendirme
+setTimeout(()=>{
+let message='Merhaba, sipariş verdim ve ödeme tamamlandı.%0A';
 cart.forEach(item=>{
 message+=`• ${item.name} (${item.color}) x${item.quantity} (${item.shipping}) - ${item.price*item.quantity}₺%0A`;
 });
 window.open('https://wa.me/905334772649?text='+message,'_blank');
+cart=[];
+updateCart();
+},5000);
+
 });
 </script>
 

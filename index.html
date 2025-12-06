@@ -1,214 +1,316 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Baytek Collection</title>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Baytek Collection - Ultra Mağaza</title>
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f8f8f8;
-        overflow-x: hidden;
-    }
+  :root{
+    --bg:#0b0b0f; --card:#16161a; --accent:#ff00ff; --muted:#bfbfbf;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Poppins,system-ui,Arial; background:#0b0b0f; color:#fff;}
 
-    /* AKIŞLI ARKA PLAN */
-    .moving-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 200%;
-        height: 100%;
-        overflow: hidden;
-        z-index: -1;
-        display: flex;
-        pointer-events: none;
-    }
+  /* FULLSCREEN GİF ARKA PLAN - sabit, tekrar etmez */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-999;
+    background-image: url("img/people_fullscreen.gif"); /* <-- buraya tam ekran gif dosyan */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* scroll'ta sabit */
+    opacity:0.65; /* istersen azalt/çoğalt */
+    filter: saturate(0.9) contrast(0.9);
+    pointer-events:none;
+  }
 
-    .bg-line {
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-repeat: repeat-x;
-        background-position: center;
-        animation: moveBackground 25s linear infinite;
-        opacity: 0.55;
-    }
+  header{
+    padding:36px 20px; display:flex;align-items:center;justify-content:space-between;
+    background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.2));
+    position:relative; z-index:10;
+  }
+  .brand{display:flex;align-items:center;gap:14px}
+  .logo{width:96px;border-radius:12px}
+  h1{margin:0;font-size:28px;color:var(--accent);text-shadow:0 0 18px rgba(255,0,255,0.12)}
+  .tagline{color:var(--muted);font-size:14px}
 
-    .bg-line.line1 { background-image: url("img/people1.gif"); }
-    .bg-line.line2 { background-image: url("img/people2.gif"); animation-duration: 32s; opacity: 0.45; }
+  .btns a{display:inline-block;margin-left:8px;padding:10px 14px;border-radius:8px;text-decoration:none;background:var(--accent);color:#111;font-weight:700;box-shadow:0 6px 30px rgba(255,0,255,0.06)}
+  .btns a.ghost{background:transparent;color:var(--accent);border:1px solid rgba(255,0,255,0.12)}
 
-    @keyframes moveBackground {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-    }
+  /* layout */
+  .container{max-width:1200px;margin:0 auto;padding:24px 16px;position:relative;z-index:5}
+  .main{display:flex;gap:20px;align-items:flex-start}
+  @media (max-width:980px){ .main{flex-direction:column} }
 
-    /* ÜRÜN GRID */
-    .container {
-        width: 90%;
-        max-width: 1300px;
-        margin: auto;
-        padding-top: 40px;
-    }
+  /* products */
+  .products{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;flex:1}
+  .product-card{
+    width:260px;background:linear-gradient(180deg,#1a1a1d,#111);border-radius:14px;padding:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);position:relative;overflow:hidden;
+  }
+  .product-card img{width:100%;height:170px;object-fit:cover;border-radius:10px;display:block}
+  .product-card h3{font-size:16px;margin:10px 0 6px}
+  .product-card p{font-size:13px;color:var(--muted);margin:0}
+  .product-card .price{font-weight:800;color:var(--accent);margin-top:8px}
+  .discount{position:absolute;top:12px;right:12px;background:#ff3b6b;color:#fff;padding:6px 8px;border-radius:8px;font-weight:700}
 
-    h1 {
-        text-align: center;
-        color: #fff;
-        margin-top: 20px;
-        text-shadow: 0 0 8px rgba(0,0,0,0.8);
-    }
+  .product-card select,.product-card input{width:100%;padding:8px;margin-top:8px;border-radius:8px;border:none;background:rgba(255,255,255,0.02);color:#fff}
+  .product-card .controls{display:flex;gap:8px;margin-top:10px}
+  .product-card button{width:100%;padding:10px;border-radius:10px;border:none;background:var(--accent);color:#111;font-weight:800;cursor:pointer;box-shadow:0 8px 30px rgba(255,0,255,0.06)}
 
-    .products {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 20px;
-        margin-top: 30px;
-    }
+  /* cart */
+  #cart-icon{position:fixed;top:20px;right:20px;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--accent);color:#111;font-weight:800;z-index:999;box-shadow:0 10px 40px rgba(255,0,255,0.12)}
+  #cart{position:fixed;right:20px;top:100px;background:#111;border-radius:12px;padding:16px;width:360px;max-height:78vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,0.7);display:none;z-index:999}
+  #cart h2{margin:0 0 10px 0;color:var(--accent);display:flex;justify-content:space-between;align-items:center}
+  #cart ul{list-style:none;padding:0;margin:0}
+  #cart li{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
+  .remove-item{cursor:pointer;color:var(--accent);font-weight:700}
+  #checkout{margin-top:12px;padding:12px;width:100%;border:none;border-radius:10px;background:var(--accent);color:#111;font-weight:800;cursor:pointer}
 
-    .product {
-        background: rgba(255,255,255,0.92);
-        border-radius: 14px;
-        padding: 15px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        backdrop-filter: blur(5px);
-        transition: 0.3s;
-    }
+  .added-popup{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:var(--accent);color:#111;padding:6px 10px;border-radius:8px;font-weight:700;display:none}
 
-    .product:hover { transform: scale(1.03); }
+  /* small last-order toast */
+  #last-order-popup{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--accent);color:#111;padding:10px 16px;border-radius:10px;display:none;z-index:999}
 
-    .product img {
-        width: 100%;
-        border-radius: 10px;
-    }
-
-    .price { font-size: 20px; font-weight: bold; margin: 10px 0; }
-    .old-price { color: #8a8a8a; text-decoration: line-through; font-size: 14px; }
-    .colors { margin: 10px 0; }
-
-    .product button {
-        width: 100%;
-        padding: 12px;
-        border: none;
-        background: #25d366;
-        color: white;
-        font-size: 16px;
-        border-radius: 10px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
-    /* POPUP */
-    .popup-bg {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.7);
-        justify-content: center;
-        align-items: center;
-        z-index: 99;
-    }
-
-    .popup {
-        width: 90%;
-        max-width: 450px;
-        background: white;
-        padding: 20px;
-        border-radius: 14px;
-        text-align: center;
-    }
-
-    .popup img {
-        width: 100%;
-        border-radius: 14px;
-        margin-bottom: 10px;
-    }
-
-    .close {
-        background: #ff3b3b !important;
-        margin-top: 10px;
-    }
+  /* utilities */
+  .hidden{display:none}
 </style>
-
 </head>
 <body>
 
-<!-- AKIŞLI ARKA PLAN -->
-<div class="moving-bg">
-    <div class="bg-line line1"></div>
-    <div class="bg-line line2"></div>
-</div>
-
-<h1>Baytek Collection – Yeni Ürünler</h1>
+<header>
+  <div class="brand">
+    <img class="logo" src="https://i.imgur.com/Xcka2e9.jpeg" alt="Baytek Logo">
+    <div>
+      <h1>Baytek Collection</h1>
+      <div class="tagline">Tarzın Yeni Merkezi – Kalite, Şıklık ve Etki Bir Arada</div>
+    </div>
+  </div>
+  <div class="btns">
+    <a href="https://instagram.com/baytekcollection" target="_blank">📸 Instagram</a>
+    <a class="ghost" href="https://wa.me/905334772649" target="_blank">KERİM BAYRAKTAR</a>
+    <a class="ghost" href="https://wa.me/905511122791" target="_blank">ENES TEKİN</a>
+  </div>
+</header>
 
 <div class="container">
+  <div class="main">
+    <section class="products" id="products">
+      <!-- 1 -->
+      <div class="product-card" data-name="Kartal figürlü LED ışıklı su şelalesi" data-price="1200" data-max="24">
+        <div class="discount">%10 İNDİRİM</div>
+        <div class="added-popup">✅ Sepete eklendi!</div>
+        <img src="https://i.imgur.com/aIAthmX.jpeg" alt="Kartal figürlü LED">
+        <h3>Kartal figürlü LED ışıklı su şelalesi</h3>
+        <p>Figür seçenekleri: 1 adet Fil, 2 adet Fil</p>
+        <select class="color-select">
+          <option>1 adet Fil</option>
+          <option>2 adet Fil</option>
+        </select>
+        <select>
+          <option>MNG - Standart</option>
+          <option>MNG - Hızlı</option>
+          <option>Aras - Standart</option>
+          <option>Aras - Hızlı</option>
+          <option>Sürat - Standart</option>
+          <option>Sürat - Hızlı</option>
+          <option>PTT - Standart</option>
+          <option>PTT - Hızlı</option>
+        </select>
+        <input type="number" value="1" min="1" max="24">
+        <button>Sepete Ekle</button>
+      </div>
 
-    <div class="products">
+      <!-- 2 -->
+      <div class="product-card" data-name="3 Bardaklı Vakumlu Termos Seti" data-price="450" data-max="24">
+        <div class="discount">%5 İNDİRİM</div>
+        <div class="added-popup">✅ Sepete eklendi!</div>
+        <img src="https://i.imgur.com/wvdZXrC.jpeg" alt="3 Bardaklı Vakumlu Termos Seti">
+        <h3>3 Bardaklı Vakumlu Termos Seti</h3>
+        <p>Renk seçenekleri: Su Yeşili, Mor, Siyah</p>
+        <select class="color-select">
+          <option>Su Yeşili</option>
+          <option>Mor</option>
+          <option>Siyah</option>
+        </select>
+        <select>
+          <option>MNG - Standart</option>
+          <option>MNG - Hızlı</option>
+          <option>Aras - Standart</option>
+          <option>Aras - Hızlı</option>
+          <option>Sürat - Standart</option>
+          <option>Sürat - Hızlı</option>
+          <option>PTT - Standart</option>
+          <option>PTT - Hızlı</option>
+        </select>
+        <input type="number" value="1" min="1" max="24">
+        <button>Sepete Ekle</button>
+      </div>
 
-        <!-- ÜRÜN 1 -->
-        <div class="product" onclick="openPopup('img/u1.jpg','3’lü Motivasyonel Su Matarası','249 TL','300 TL')">
-            <img src="img/u1.jpg">
-            <div class="price">249 TL <span class="old-price">300 TL</span></div>
-            <div class="colors">
-                <strong>Renk:</strong>
-                <select>
-                    <option>Pembe</option>
-                    <option>Mavi</option>
-                    <option>Siyah</option>
-                </select>
-            </div>
-            <button>WhatsApp Sipariş</button>
-        </div>
+      <!-- 3 -->
+      <div class="product-card" data-name="Mobgift USB’li Işıklı Ahşap Standlı Cam Küre" data-price="200" data-max="52">
+        <div class="added-popup">✅ Sepete eklendi!</div>
+        <img src="https://i.imgur.com/oiAFO7w.jpeg" alt="Mobgift Cam Küre">
+        <h3>Mobgift USB’li Işıklı Ahşap Standlı Cam Küre</h3>
+        <p>Figür seçenekleri: Astronot, Melek, Galaksi</p>
+        <select class="color-select">
+          <option>Astronot</option>
+          <option>Melek</option>
+          <option>Galaksi</option>
+        </select>
+        <select>
+          <option>MNG - Standart</option>
+          <option>MNG - Hızlı</option>
+          <option>Aras - Standart</option>
+          <option>Aras - Hızlı</option>
+          <option>Sürat - Standart</option>
+          <option>Sürat - Hızlı</option>
+          <option>PTT - Standart</option>
+          <option>PTT - Hızlı</option>
+        </select>
+        <input type="number" value="1" min="1" max="52">
+        <button>Sepete Ekle</button>
+      </div>
 
-        <!-- ÜRÜN 2 -->
-        <div class="product" onclick="openPopup('img/u2.jpg','3 Bardaklı Vakumlu Termos Seti','299 TL','360 TL')">
-            <img src="img/u2.jpg">
-            <div class="price">299 TL <span class="old-price">360 TL</span></div>
-            <button>WhatsApp Sipariş</button>
-        </div>
+      <!-- 4 -->
+      <div class="product-card" data-name="3’lü Motivasyonel Su Matarası" data-price="350" data-max="24">
+        <div class="added-popup">✅ Sepete eklendi!</div>
+        <img src="https://i.imgur.com/2en5c9l.jpeg" alt="Motivasyonel Su Matarası">
+        <h3>3’lü Motivasyonel Su Matarası</h3>
+        <p>Renk seçenekleri: Siyah</p>
+        <select class="color-select">
+          <option>Siyah</option>
+        </select>
+        <select>
+          <option>MNG - Standart</option>
+          <option>MNG - Hızlı</option>
+          <option>Aras - Standart</option>
+          <option>Aras - Hızlı</option>
+          <option>Sürat - Standart</option>
+          <option>Sürat - Hızlı</option>
+          <option>PTT - Standart</option>
+          <option>PTT - Hızlı</option>
+        </select>
+        <input type="number" value="1" min="1" max="24">
+        <button>Sepete Ekle</button>
+      </div>
 
-        <!-- ÜRÜN 3 -->
-        <div class="product" onclick="openPopup('img/u3.jpg','Mobgift USB Işıklı Ahşap Standlı Cam Küre','349 TL','430 TL')">
-            <img src="img/u3.jpg">
-            <div class="price">349 TL <span class="old-price">430 TL</span></div>
-            <button>WhatsApp Sipariş</button>
-        </div>
+    </section>
 
+    <!-- Cart -->
+    <div id="cart">
+      <h2>Sepet <span id="cart-total">0₺</span></h2>
+      <ul></ul>
+      <button id="checkout">Siparişi Tamamla</button>
     </div>
+
+  </div>
 </div>
 
-
-<!-- POPUP -->
-<div class="popup-bg" id="popupBg">
-    <div class="popup" id="popupBox">
-        <img id="popupImg">
-        <h2 id="popupTitle"></h2>
-        <p style="font-size:18px; font-weight:bold;" id="popupPrice"></p>
-
-        <a id="waLink" target="_blank">
-            <button>WhatsApp’tan Sipariş Ver</button>
-        </a>
-
-        <button class="close" onclick="closePopup()">Kapat</button>
-    </div>
-</div>
-
+<div id="last-order-popup"></div>
 
 <script>
-function openPopup(img, title, price, oldPrice) {
-    document.getElementById("popupImg").src = img;
-    document.getElementById("popupTitle").innerText = title;
-    document.getElementById("popupPrice").innerText = price + "  (Eski: " + oldPrice + ")";
-    document.getElementById("waLink").href =
-        "https://wa.me/905334772649?text=" + encodeURIComponent(title + " hakkında sipariş vermek istiyorum.");
+/* ---------- Sepet işlemleri (tek dosya, ürünler sadece bir kez DOM'da) ---------- */
+let cart = [];
+const cartIcon = document.getElementById('cart-icon');
+const cartDiv = document.getElementById('cart');
+const cartTotal = document.getElementById('cart-total');
+const lastPopup = document.getElementById('last-order-popup');
 
-    document.getElementById("popupBg").style.display = "flex";
+document.querySelectorAll('.product-card button').forEach(btn=>{
+  btn.addEventListener('click', ()=> {
+    const card = btn.closest('.product-card');
+    const name = card.getAttribute('data-name');
+    const price = Number(card.getAttribute('data-price'));
+    let quantity = Number(card.querySelector('input').value) || 1;
+    const max = Number(card.getAttribute('data-max')) || 99;
+    if(quantity > max) quantity = max;
+    const shipping = card.querySelector('select:nth-of-type(2)').value;
+    const color = card.querySelector('.color-select').value;
+
+    // aynı ürün+renk+kargo kontrolü
+    const exists = cart.find(i => i.name === name && i.color === color && i.shipping === shipping);
+    if(exists) {
+      exists.quantity += quantity;
+      if(exists.quantity > max) exists.quantity = max;
+    } else {
+      cart.push({name, price, quantity, shipping, color, max});
+    }
+
+    updateCartUI();
+
+    // kısa popup
+    const popup = card.querySelector('.added-popup');
+    if(popup){
+      popup.style.display = 'block';
+      setTimeout(()=> popup.style.display = 'none', 1000);
+    }
+
+    // last-order small toast
+    lastPopup.textContent = `${name} sepete eklendi!`;
+    lastPopup.style.display = 'block';
+    setTimeout(()=> lastPopup.style.display = 'none', 1900);
+  });
+});
+
+// cart show/hide by clicking cart-icon (if exists)
+if(document.getElementById('cart-icon')){
+  document.getElementById('cart-icon').addEventListener('click', ()=>{
+    cartDiv.style.display = cartDiv.style.display === 'none' || !cartDiv.style.display ? 'block' : 'none';
+  });
 }
 
-function closePopup() {
-    document.getElementById("popupBg").style.display = "none";
+// update cart UI
+function updateCartUI(){
+  const ul = cartDiv.querySelector('ul');
+  ul.innerHTML = '';
+  let total = 0;
+  cart.forEach((item, idx) => {
+    total += item.price * item.quantity;
+    const li = document.createElement('li');
+    li.innerHTML = `${item.name} (${item.color}) x${item.quantity} <span>${item.price*item.quantity}₺</span> <button class="remove" data-idx="${idx}">❌</button>`;
+    ul.appendChild(li);
+  });
+  cartTotal.textContent = total + '₺';
+  // remove listeners
+  ul.querySelectorAll('.remove').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const i = Number(btn.getAttribute('data-idx'));
+      if(!isNaN(i)) cart.splice(i,1);
+      updateCartUI();
+    });
+  });
 }
+
+// checkout: Shopier + WhatsApp (ilk ürünün shopier linkine yönlendirme)
+document.getElementById('checkout').addEventListener('click', ()=>{
+  if(cart.length === 0){ alert('Sepetiniz boş!'); return; }
+  let message = 'Merhaba, sipariş vermek istiyorum:%0A';
+  cart.forEach(it => {
+    message += `• ${it.name} (${it.color}) x${it.quantity} (${it.shipping}) - ${it.price*it.quantity}₺%0A`;
+  });
+
+  const shopierLinks = {
+    "Kartal figürlü LED ışıklı su şelalesi":"https://shopier.com/baytekcollection/41882654",
+    "3 Bardaklı Vakumlu Termos Seti":"https://shopier.com/baytekcollection/41884160",
+    "Mobgift USB’li Işıklı Ahşap Standlı Cam Küre":"https://shopier.com/baytekcollection/41884313",
+    "3’lü Motivasyonel Su Matarası":"https://shopier.com/baytekcollection/41884046"
+  };
+  const firstLink = shopierLinks[cart[0].name] || Object.values(shopierLinks)[0];
+  window.open(firstLink, '_blank');
+  window.open('https://wa.me/905334772649?text=' + encodeURIComponent(message), '_blank');
+});
+
+/* ---------- EK GÜVENLİK: tek seferlik ürün çoğaltma hatasını ortadan kaldırma ---------- */
+/* 
+   (Senin daha önceki dosyada birden fazla <html> olması veya script'in iki kere
+    çalışmasından dolayı ürünler çoğalıyor - burada ürün DOM'u sabit, script sadece
+    varolan product-card'lara bağlanır. Bu şekilde "klonlama" olmaz.)
+*/
+
 </script>
-
 </body>
 </html>

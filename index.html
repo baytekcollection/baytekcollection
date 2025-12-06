@@ -158,29 +158,6 @@ h1 {font-size:42px; letter-spacing:3px; text-transform:uppercase; font-weight:80
 <button>Sepete Ekle</button>
 </div>
 
-<!-- 5. Ürün -->
-<div class="product-card" data-name="3'lü Pipetli Motivasyonel Su Matarası" data-price="400" data-max="2">
-<div class="added-popup">✅ Sepete eklendi!</div>
-<img src="https://i.imgur.com/2en5c9l.jpeg" alt="">
-<h3>3'lü Pipetli Motivasyonel Su Matarası</h3>
-<p>Renk: Siyah</p>
-<select class="color-select">
-<option value="Siyah">Siyah</option>
-</select>
-<select>
-<option value="MNG - Standart">MNG - Standart</option>
-<option value="MNG - Hızlı">MNG - Hızlı</option>
-<option value="Aras - Standart">Aras - Standart</option>
-<option value="Aras - Hızlı">Aras - Hızlı</option>
-<option value="Sürat - Standart">Sürat - Standart</option>
-<option value="Sürat - Hızlı">Sürat - Hızlı</option>
-<option value="PTT - Standart">PTT - Standart</option>
-<option value="PTT - Hızlı">PTT - Hızlı</option>
-</select>
-<input type="number" value="1" min="1" max="2">
-<button>Sepete Ekle</button>
-</div>
-
 </section>
 
 <div id="cart">
@@ -211,25 +188,23 @@ for(let i=0;i<50;i++){
   document.head.appendChild(style);
 }
 
-// Sepet ve Shopier / WhatsApp
+// Sepet işlemleri
 let cart=[];
 const cartIcon=document.getElementById('cart-icon');
 const cartCount=document.getElementById('cart-count');
 const cartDiv=document.getElementById('cart');
 const cartTotal=document.getElementById('cart-total');
 const lastPopup=document.getElementById('last-order-popup');
-
-cartIcon.addEventListener('click',()=>{cartDiv.style.display=cartDiv.style.display==='none'?'block':'none';});
+const myWhatsAppNumber='905334772649';
 
 const shopierLinks = {
-  "Kartal figürlü LED ışıklı su şelalesi": "https://www.shopier.com/s/urun1",
-  "3 Bardaklı Vakumlu Termos Seti": "https://www.shopier.com/s/urun2",
-  "Mobgift USB’li Işıklı Ahşap Standlı Cam Küre": "https://www.shopier.com/s/urun3",
-  "3’lü Motivasyonel Su Matarası": "https://www.shopier.com/s/urun4",
-  "3'lü Pipetli Motivasyonel Su Matarası": "https://www.shopier.com/s/urun5"
+  "Kartal figürlü LED ışıklı su şelalesi":"https://www.shopier.com/kartal-figurlu",
+  "3 Bardaklı Vakumlu Termos Seti":"https://www.shopier.com/3-bardakli-termos",
+  "Mobgift USB’li Işıklı Ahşap Standlı Cam Küre":"https://www.shopier.com/mobgift-cam-kure",
+  "3’lü Motivasyonel Su Matarası":"https://www.shopier.com/3lu-mot-su-matarasi"
 };
 
-const myWhatsAppNumber = "905334772649";
+cartIcon.addEventListener('click',()=>{cartDiv.style.display=cartDiv.style.display==='none'?'block':'none';});
 
 document.querySelectorAll('.product-card button').forEach(btn=>{
 btn.addEventListener('click',()=>{
@@ -248,12 +223,10 @@ else{cart.push({name,price,quantity,shipping,color});}
 
 updateCart();
 
-// Popup
 const popup=card.querySelector('.added-popup');
 popup.style.display='block';
 setTimeout(()=>{popup.style.display='none';},1000);
 
-// Son sipariş popup
 lastPopup.textContent=`${name} sepete eklendi!`;
 lastPopup.style.display='block';
 setTimeout(()=>{lastPopup.style.display='none';},2000);

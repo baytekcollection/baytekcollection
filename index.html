@@ -164,7 +164,7 @@ h1{font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;co
 <h2>Sepet <span id="cart-total">0₺</span></h2>
 <ul></ul>
 <button id="checkout">Siparişi Tamamla</button>
-<button id="clear-cart" style="margin-top:5px;padding:8px;width:100%;background:#ff5555;border:none;border-radius:8px;color:#fff;cursor:pointer;">Sepeti Temizle</button>
+<div style="margin-top:10px;font-size:12px;color:#ccc;">Sipariş gönderilecek numara: 05334772649</div>
 </div>
 
 <div id="last-order-popup"></div>
@@ -172,7 +172,7 @@ h1{font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;co
 
 <script>
 // Arka plan hareketli cisimler
-const animContainer = document.getElementById('animation-container');
+const animContainer=document.getElementById('animation-container');
 for(let i=0;i<50;i++){
   const div=document.createElement('div');
   div.style.position='absolute';
@@ -185,7 +185,7 @@ for(let i=0;i<50;i++){
   div.style.animation=`float${i} ${Math.random()*10+5}s linear infinite`;
   animContainer.appendChild(div);
   const style=document.createElement('style');
-  style.innerHTML=`@keyframes float${i} {0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-200px) rotate(180deg);}100%{transform:translateY(0) rotate(360deg);}}`;
+  style.innerHTML=`@keyframes float${i}{0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-200px) rotate(180deg);}100%{transform:translateY(0) rotate(360deg);}}`;
   document.head.appendChild(style);
 }
 
@@ -196,68 +196,76 @@ const cartCount=document.getElementById('cart-count');
 const cartDiv=document.getElementById('cart');
 const cartTotal=document.getElementById('cart-total');
 const lastPopup=document.getElementById('last-order-popup');
-const clearCartBtn=document.getElementById('clear-cart');
 const whatsappNumber='05334772649';
 
 cartIcon.addEventListener('click',()=>{cartDiv.style.display=cartDiv.style.display==='none'?'block':'none';});
-clearCartBtn.addEventListener('click',()=>{cart=[];updateCart();});
 
 document.querySelectorAll('.product-card button').forEach(btn=>{
 btn.addEventListener('click',()=>{
-const card=btn.parentElement;
-const name=card.getAttribute('data-name');
-const price=Number(card.getAttribute('data-price'));
-const max=Number(card.getAttribute('data-max'));
-const shopier=card.getAttribute('data-shopier');
-let quantity=Number(card.querySelector('input').value);
-if(quantity>max) quantity=max;
-const color=card.querySelector('.color-select').value;
-const shipping=card.querySelector('select:nth-of-type(2)').value;
+  const card=btn.parentElement;
+  const name=card.getAttribute('data-name');
+  const price=Number(card.getAttribute('data-price'));
+  const max=Number(card.getAttribute('data-max'));
+  const shopier=card.getAttribute('data-shopier');
+  let quantity=Number(card.querySelector('input').value);
+  if(quantity>max) quantity=max;
+  const color=card.querySelector('.color-select').value;
+  const shipping=card.querySelector('select:nth-of-type(2)').value;
 
-const exists=cart.find(i=>i.name===name && i.color===color && i.shipping===shipping);
-if(exists){exists.quantity+=quantity;if(exists.quantity>max) exists.quantity=max;}
-else{cart.push({name,price,quantity,color,shipping,shopier});}
+  const exists=cart.find(i=>i.name===name && i.color===color && i.shipping===shipping);
+  if(exists){exists.quantity+=quantity;if(exists.quantity>max) exists.quantity=max;}
+  else{cart.push({name,price,quantity,color,shipping,shopier});}
 
-updateCart();
-const popup=card.querySelector('.added-popup');
-popup.style.display='block';
-setTimeout(()=>{popup.style.display='none';},1000);
-lastPopup.textContent=`${name} sepete eklendi!`;
-lastPopup.style.display='block';
-setTimeout(()=>{lastPopup.style.display='none';},2000);
+  updateCart();
+  const popup=card.querySelector('.added-popup');
+  popup.style.display='block';
+  setTimeout(()=>{popup.style.display='none';},1000);
+  lastPopup.textContent=`${name} sepete eklendi!`;
+  lastPopup.style.display='block';
+  setTimeout(()=>{lastPopup.style.display='none';},2000);
 });
 });
 
 function updateCart(){
-const ul=document.querySelector('#cart ul');
-ul.innerHTML='';
-let total=0;
-cart.forEach((item,i)=>{
-  const li=document.createElement('li');
-  li.innerHTML=`${item.name} x${item.quantity} - ${item.price*item.quantity}₺ <span class="remove-item" data-index="${i}">×</span>`;
-  ul.appendChild(li);
-  total+=item.price*item.quantity;
-});
-cartTotal.textContent=`${total}₺`;
-cartCount.textContent=cart.reduce((a,b)=>a+b.quantity,0);
-document.querySelectorAll('.remove-item').forEach(rm=>{
-rm.addEventListener('click',()=>{
-  const idx=rm.getAttribute('data-index');
-  cart.splice(idx,1);
-  updateCart();
-});
-});
+  const ul=document.querySelector('#cart ul');
+  ul.innerHTML='';
+  let total=0;
+  cart.forEach((item,i)=>{
+    const li=document.createElement('li');
+    li.innerHTML=`${item.name} x${item.quantity} - ${item.price*item.quantity}₺ <span class="remove-item" data-index="${i}">×</span>`;
+    ul.appendChild(li);
+    total+=item.price*item.quantity;
+  });
+  cartTotal.textContent=`${total}₺`;
+  cartCount.textContent=cart.reduce((a,b)=>a+b.quantity,0);
+  document.querySelectorAll('.remove-item').forEach(rm=>{
+    rm.addEventListener('click',()=>{
+      const idx=rm.getAttribute('data-index');
+      cart.splice(idx,1);
+      updateCart();
+    });
+  });
 }
 
-// Checkout + Shopier ve WhatsApp
+// Checkout işlemi
 document.getElementById('checkout').addEventListener('click',()=>{
   if(cart.length===0){alert('Sepet boş!'); return;}
   let messages=[];
-  let firstShopierLink='';
+  let shopierLinks=[];
   cart.forEach(item=>{
     messages.push(`${item.name} x${item.quantity} - Renk: ${item.color} - Kargo: ${item.shipping}`);
-    if(!firstShopierLink) firstShopierLink=item.shopier; // İlk ürünün Shopier linkine yönlendir
+    shopierLinks.push(item.shopier);
   });
+  // WhatsApp bildirimi
+  const wpMsg=encodeURIComponent("Yeni Sipariş!\n"+messages.join("\n"));
+  window.open(`https://wa.me/${whatsappNumber}?text=${wpMsg}`,'_blank');
+  // Shopier yönlendirme
+  shopierLinks.forEach(link=>window.open(link,'_blank'));
+});
+</script>
+
+</body>
+</html>
   // WhatsApp bildirimi
   const wpMsg = encodeURIComponent("Yeni Sipariş!\n"+messages.join("\n"));
   window.open(`https://wa.me/${whatsappNumber}?text=${wpMsg}`,'_blank');

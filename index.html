@@ -36,6 +36,7 @@ h1 {font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;c
 @keyframes popupAnim {0%{opacity:0;transform:translate(-50%,-10px);}50%{opacity:1;transform:translate(-50%,0);}100%{opacity:0;transform:translate(-50%,-10px);}}
 .color-option {display:inline-block;margin:3px;padding:5px 10px;border-radius:5px;background:#ff00ff;color:#111;cursor:pointer;transition:0.3s;}
 .color-option.selected {box-shadow:0 0 20px #ff00ff;}
+/* Parallax background effect */
 body::before {content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:url('https://i.imgur.com/5U3F9jA.jpg') center/cover no-repeat;opacity:0.05;z-index:-1;transition:transform 0.3s;}
 body:hover::before {transform:scale(1.02);}
 </style>
@@ -58,7 +59,7 @@ body:hover::before {transform:scale(1.02);}
 <section class="products">
 
 <!-- 1. Ürün -->
-<div class="product-card" data-name="Kartal figürlü LED ışıklı su şelalesi" data-price="1200" data-max="24">
+<div class="product-card" data-name="Kartal figürlü LED ışıklı su şelalesi" data-price="1200" data-max="24" data-shopier="https://shopier.com/baytekcollection/41882654">
 <div class="added-popup">✅ Sepete eklendi!</div>
 <img src="https://i.imgur.com/aIAthmX.jpeg" alt="">
 <h3>Kartal figürlü LED ışıklı su şelalesi</h3>
@@ -81,7 +82,7 @@ body:hover::before {transform:scale(1.02);}
 <button>Add to Cart</button>
 </div>
 
-<!-- 2. Ürün Shopier -->
+<!-- 2. Ürün -->
 <div class="product-card" data-name="3 Bardaklı Vakumlu Termos Seti" data-price="450" data-max="24" data-shopier="https://shopier.com/baytekcollection/41884160">
 <div class="added-popup">✅ Sepete eklendi!</div>
 <img src="https://i.imgur.com/wvdZXrC.jpeg" alt="">
@@ -106,7 +107,7 @@ body:hover::before {transform:scale(1.02);}
 <button>Add to Cart</button>
 </div>
 
-<!-- 3. Ürün Shopier -->
+<!-- 3. Ürün -->
 <div class="product-card" data-name="Mobgift USB’li Işıklı Ahşap Standlı Cam Küre" data-price="200" data-max="52" data-shopier="https://shopier.com/baytekcollection/41884313">
 <div class="added-popup">✅ Sepete eklendi!</div>
 <img src="https://i.imgur.com/oiAFO7w.jpeg" alt="">
@@ -131,10 +132,10 @@ body:hover::before {transform:scale(1.02);}
 <button>Add to Cart</button>
 </div>
 
-<!-- 4. Ürün Yeni Su Matarası -->
+<!-- 4. Ürün -->
 <div class="product-card" data-name="3’lü Motivasyonel Su Matarası, 2 Litre 750 Ml 300 Ml BPA İçermez Suluk" data-price="350" data-max="24" data-shopier="https://shopier.com/baytekcollection/41884046">
 <div class="added-popup">✅ Sepete eklendi!</div>
-<img src="https://i.imgur.com/iseyCZu.jpeg" alt="">
+<img src="https://i.imgur.com/iseyCZu.jpeg" alt="3’lü Motivasyonel Su Matarası">
 <h3>3’lü Motivasyonel Su Matarası, 2 Litre 750 Ml 300 Ml BPA İçermez Suluk</h3>
 <p>Renk seçenekleri: Siyah</p>
 <select class="color-select">
@@ -181,10 +182,11 @@ const max=Number(card.getAttribute('data-max'));
 if(quantity>max) quantity=max;
 const shipping=card.querySelector('select:nth-of-type(2)').value;
 const color=card.querySelector('.color-select').value;
+const shopier=card.getAttribute('data-shopier');
 
 const exists=cart.find(i=>i.name===name && i.color===color && i.shipping===shipping);
 if(exists){exists.quantity+=quantity;if(exists.quantity>max) exists.quantity=max;}
-else{cart.push({name,price,quantity,shipping,color});}
+else{cart.push({name,price,quantity,shipping,color,shopier});}
 
 updateCart();
 
@@ -216,26 +218,11 @@ updateCart();
 
 document.querySelector('#checkout').addEventListener('click',()=>{
 if(cart.length===0)return alert('Sepetiniz boş!');
-
-// Shopier yönlendirmesi
-cart.forEach(item=>{
-const card = [...document.querySelectorAll('.product-card')].find(c => c.getAttribute('data-name')===item.name);
-if(card && card.dataset.shopier){
-for(let i=0;i<item.quantity;i++){
-window.open(card.dataset.shopier,'_blank');
-}
-}
-});
-
-// Ödeme sonrası WhatsApp yönlendirme
-let message='Merhaba, ödeme tamamlandı!%0ASipariş detayları:%0A';
+let message='Merhaba, sipariş vermek istiyorum:%0A';
 cart.forEach(item=>{
 message+=`• ${item.name} (${item.color}) x${item.quantity} (${item.shipping}) - ${item.price*item.quantity}₺%0A`;
 });
 window.open('https://wa.me/905334772649?text='+message,'_blank');
-
-cart=[]; // Sepeti temizle
-updateCart();
 });
 </script>
 

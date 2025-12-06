@@ -58,7 +58,7 @@ h1{font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;co
 
 <section class="products">
 
-<!-- Ürünler (4 adet) -->
+<!-- Ürün 1 -->
 <div class="product-card" data-name="Kartal figürlü LED ışıklı su şelalesi" data-price="1200" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41882654">
 <div class="discount">%10 İNDİRİM</div>
 <div class="added-popup">✅ Sepete eklendi!</div>
@@ -83,6 +83,7 @@ h1{font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;co
 <button>Sepete Ekle</button>
 </div>
 
+<!-- Ürün 2 -->
 <div class="product-card" data-name="3 Bardaklı Vakumlu Termos Seti" data-price="450" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41884160">
 <div class="discount">%5 İNDİRİM</div>
 <div class="added-popup">✅ Sepete eklendi!</div>
@@ -108,6 +109,7 @@ h1{font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;co
 <button>Sepete Ekle</button>
 </div>
 
+<!-- Ürün 3 -->
 <div class="product-card" data-name="Mobgift USB’li Işıklı Ahşap Standlı Cam Küre" data-price="200" data-max="52" data-shopier="https://www.shopier.com/baytekcollection/41884313">
 <div class="added-popup">✅ Sepete eklendi!</div>
 <img src="https://i.imgur.com/oiAFO7w.jpeg" alt="">
@@ -132,6 +134,7 @@ h1{font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;co
 <button>Sepete Ekle</button>
 </div>
 
+<!-- Ürün 4 -->
 <div class="product-card" data-name="3’lü Motivasyonel Su Matarası" data-price="350" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41884046">
 <div class="added-popup">✅ Sepete eklendi!</div>
 <img src="https://i.imgur.com/2en5c9l.jpeg" alt="">
@@ -167,92 +170,9 @@ h1{font-size:42px;letter-spacing:3px;text-transform:uppercase;font-weight:800;co
 <div id="animation-container"></div>
 
 <script>
-// Arka plan animasyonu
+// Animasyon
 const animContainer=document.getElementById('animation-container');
 for(let i=0;i<50;i++){
   const div=document.createElement('div');
   div.style.position='absolute';
-  div.style.width=Math.random()*20+10+'px';
-  div.style.height=Math.random()*20+10+'px';
-  div.style.backgroundColor='rgba(255,0,255,'+Math.random()+')';
-  div.style.borderRadius='50%';
-  div.style.top=Math.random()*100+'%';
-  div.style.left=Math.random()*100+'%';
-  div.style.animation=`float${i} ${Math.random()*10+5}s linear infinite`;
-  animContainer.appendChild(div);
-  const style=document.createElement('style');
-  style.innerHTML=`@keyframes float${i}{0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-200px) rotate(180deg);}100%{transform:translateY(0) rotate(360deg);}}`;
-  document.head.appendChild(style);
-}
-
-// Sepet işlemleri
-let cart=[];
-const cartIcon=document.getElementById('cart-icon');
-const cartCount=document.getElementById('cart-count');
-const cartDiv=document.getElementById('cart');
-const cartTotal=document.getElementById('cart-total');
-const lastPopup=document.getElementById('last-order-popup');
-const whatsappNumber='05334772649';
-
-cartIcon.addEventListener('click',()=>{cartDiv.style.display=cartDiv.style.display==='none'?'block':'none';});
-
-document.querySelectorAll('.product-card button').forEach(btn=>{
-btn.addEventListener('click',()=>{
-  const card=btn.parentElement;
-  const name=card.getAttribute('data-name');
-  const price=Number(card.getAttribute('data-price'));
-  const max=Number(card.getAttribute('data-max'));
-  const shopier=card.getAttribute('data-shopier');
-  let quantity=Number(card.querySelector('input').value);
-  if(quantity>max) quantity=max;
-  const color=card.querySelector('.color-select').value;
-  const shipping=card.querySelector('select:nth-of-type(2)').value;
-
-  const exists=cart.find(i=>i.name===name && i.color===color && i.shipping===shipping);
-  if(exists){exists.quantity+=quantity;if(exists.quantity>max) exists.quantity=max;}
-  else{cart.push({name,price,quantity,color,shipping,shopier});}
-
-  updateCart();
-  const popup=card.querySelector('.added-popup');
-  popup.style.display='block';
-  setTimeout(()=>{popup.style.display='none';},1000);
-  lastPopup.textContent=`${name} sepete eklendi!`;
-  lastPopup.style.display='block';
-  setTimeout(()=>{lastPopup.style.display='none';},2000);
-});
-});
-
-function updateCart(){
-  const ul=document.querySelector('#cart ul');
-  ul.innerHTML='';
-  let total=0;
-  cart.forEach((item,i)=>{
-    const li=document.createElement('li');
-    li.innerHTML=`${item.name} x${item.quantity} - ${item.price*item.quantity}₺ <span class="remove-item" data-index="${i}">×</span>`;
-    ul.appendChild(li);
-    total+=item.price*item.quantity;
-  });
-  cartTotal.textContent=`${total}₺`;
-  cartCount.textContent=cart.reduce((a,b)=>a+b.quantity,0);
-  document.querySelectorAll('.remove-item').forEach(rm=>{
-    rm.addEventListener('click',()=>{
-      const idx=rm.getAttribute('data-index');
-      cart.splice(idx,1);
-      updateCart();
-    });
-  });
-}
-
-// Checkout
-document.getElementById('checkout').addEventListener('click',()=>{
-  if(cart.length===0){alert('Sepet boş!'); return;}
-  // Shopier linklerini aç
-  cart.forEach(item=>window.open(item.shopier,'_blank'));
-  alert('Shopier ödeme sayfasına yönlendirildiniz. Ödeme tamamlandıktan sonra size WhatsApp bildirimi gelir.');
-  cart=[];
-  updateCart();
-});
-</script>
-
-</body>
-</html>
+  div.

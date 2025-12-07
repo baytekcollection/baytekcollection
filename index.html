@@ -14,8 +14,9 @@ body{
   text-align:center;
   overflow-x:hidden;
   position:relative;
-  padding-bottom:150px;
+  padding-bottom:150px; /* Alt bildirimler için boşluk */
 }
+/* ===== HEADER ===== */
 header{
   padding:50px 20px;
   background:linear-gradient(135deg,#000,#222);
@@ -50,6 +51,7 @@ h1{
   box-shadow:0 0 35px #ff00ff;
   transform:scale(1.05);
 }
+/* ===== PRODUCTS GRID ===== */
 .products{
   display:flex;
   flex-wrap:wrap;
@@ -58,6 +60,7 @@ h1{
   padding:40px 20px;
   perspective:1200px;
 }
+/* ===== PRODUCT CARD ===== */
 .product-card{
   background:#222;
   border-radius:15px;
@@ -105,6 +108,7 @@ h1{
   background:#fff;color:#ff00ff;transform:scale(1.15) rotate(1deg);
   box-shadow:0 0 35px #ff00ff;
 }
+/* ===== CART ICON ===== */
 #cart-icon{
   position:fixed;top:20px;right:20px;background:#ff00ff;color:#111;
   padding:12px;border-radius:50%;width:55px;height:55px;display:flex;
@@ -113,6 +117,7 @@ h1{
 }
 #cart-icon span{font-weight:700;}
 @keyframes glowCart{0%{box-shadow:0 0 30px #ff00ff;}50%{box-shadow:0 0 50px #ff00ff;}100%{box-shadow:0 0 30px #ff00ff;}}
+/* ===== CART PANEL ===== */
 #cart{
   position:fixed;right:20px;top:90px;background:#222;border-radius:15px;
   padding:20px;width:380px;max-height:80vh;overflow-y:auto;box-shadow:0 0 40px #ff00ff;
@@ -124,10 +129,15 @@ h1{
 .remove-item{cursor:pointer;color:#ff00ff;font-weight:700;margin-left:5px;}
 #checkout{margin-top:12px;padding:12px;width:100%;background:#ff00ff;border:none;border-radius:8px;font-weight:700;cursor:pointer;box-shadow:0 0 15px #ff00ff;}
 #checkout:hover{background:#fff;color:#ff00ff;transform:scale(1.03);}
+/* ===== POPUPS ===== */
 .added-popup{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:#ff00ff;color:#111;padding:5px 12px;border-radius:6px;font-size:13px;display:none;animation:popupAnim 0.6s;}
 @keyframes popupAnim{0%{opacity:0;transform:translate(-50%,-10px);}50%{opacity:1;transform:translate(-50%,0);}100%{opacity:0;transform:translate(-50%,-10px);}}
+
+/* ===== PRODUCT IMAGE SWITCH ===== */
 .color-select{display:inline-block;margin:3px;padding:5px 10px;border-radius:5px;background:#ff00ff;color:#111;cursor:pointer;transition:0.3s;}
 .color-select.selected{box-shadow:0 0 20px #ff00ff;}
+
+/* ===== ANIMATION BACKGROUND ===== */
 #animation-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
 .discount{position:absolute;top:10px;right:10px;background:red;color:#fff;padding:5px 8px;border-radius:6px;font-size:13px;font-weight:700;}
 #last-order-popup{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#ff00ff;color:#111;padding:10px 18px;border-radius:10px;font-weight:700;box-shadow:0 0 15px #ff00ff;display:none;animation:popupAnim 0.5s;z-index:1001;}
@@ -153,22 +163,16 @@ h1{
 <div id="cart-icon">🛒 <span id="cart-count">0</span></div>
 
 <section class="products">
-  <!-- Kartal figürlü ürün -->
+  <!-- Kartal Figürlü Ürün -->
   <div class="product-card" data-name="Kartal figürlü LED ışıklı su şelalesi" data-price="1200" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41882654">
     <div class="discount">%10 İNDİRİM</div>
     <div class="added-popup">✅ Sepete eklendi!</div>
-    <img src="https://i.imgur.com/aIAthmX.jpeg" alt="">
+    <img src="https://i.imgur.com/aIAthmX.jpeg" alt="Kartal Figür">
     <h3>Kartal figürlü LED ışıklı su şelalesi</h3>
-    <p>Figür seçenekleri: Kartal, Fil</p>
+    <p>Figür seçenekleri:</p>
     <select class="color-select">
       <option value="Kartal">Kartal</option>
       <option value="Fil">Fil</option>
-    </select>
-    <!-- Extra görsel manuel seçimi -->
-    <p>Ekstra görsel seçin:</p>
-    <select class="extra-image-select">
-      <option value="https://i.imgur.com/BS6RZNj.jpeg">Görsel 1</option>
-      <option value="https://i.imgur.com/yx8YbKD.jpeg">Görsel 2</option>
     </select>
     <select>
       <option value="MNG - Standart">MNG - Standart</option>
@@ -184,7 +188,33 @@ h1{
     <button>Sepete Ekle</button>
   </div>
 
-  <!-- Diğer ürünler -->
+  <!-- Fil Figürlü Ürün (Mevcut 2 görsel) -->
+  <div class="product-card" data-name="Fil figürlü LED ışıklı su şelalesi" data-price="1200" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41882654">
+    <div class="discount">%10 İNDİRİM</div>
+    <div class="added-popup">✅ Sepete eklendi!</div>
+    <img id="fil-img" src="https://i.imgur.com/BS6RZNj.jpeg" alt="Fil Figür 1">
+    <img id="fil-img2" src="https://i.imgur.com/yx8YbKD.jpeg" alt="Fil Figür 2" style="display:none;">
+    <h3>Fil figürlü LED ışıklı su şelalesi</h3>
+    <p>Figür seçenekleri:</p>
+    <select class="color-select" id="fil-select">
+      <option value="Fil 1">Fil 1</option>
+      <option value="Fil 2">Fil 2</option>
+    </select>
+    <select>
+      <option value="MNG - Standart">MNG - Standart</option>
+      <option value="MNG - Hızlı">MNG - Hızlı</option>
+      <option value="Aras - Standart">Aras - Standart</option>
+      <option value="Aras - Hızlı">Aras - Hızlı</option>
+      <option value="Sürat - Standart">Sürat - Standart</option>
+      <option value="Sürat - Hızlı">Sürat - Hızlı</option>
+      <option value="PTT - Standart">PTT - Standart</option>
+      <option value="PTT - Hızlı">PTT - Hızlı</option>
+    </select>
+    <input type="number" value="1" min="1" max="24">
+    <button>Sepete Ekle</button>
+  </div>
+
+  <!-- 3 Bardaklı Vakumlu Termos Seti -->
   <div class="product-card" data-name="3 Bardaklı Vakumlu Termos Seti" data-price="450" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41884160">
     <div class="discount">%5 İNDİRİM</div>
     <div class="added-popup">✅ Sepete eklendi!</div>
@@ -209,7 +239,8 @@ h1{
     <input type="number" value="1" min="1" max="24">
     <button>Sepete Ekle</button>
   </div>
-  <!-- Ürün 3 -->
+
+  <!-- Mobgift USB’li Işıklı Ahşap Standlı Cam Küre -->
   <div class="product-card" data-name="Mobgift USB’li Işıklı Ahşap Standlı Cam Küre" data-price="200" data-max="52" data-shopier="https://www.shopier.com/baytekcollection/41884313">
     <div class="added-popup">✅ Sepete eklendi!</div>
     <img src="https://i.imgur.com/oiAFO7w.jpeg" alt="">
@@ -234,7 +265,7 @@ h1{
     <button>Sepete Ekle</button>
   </div>
 
-  <!-- Ürün 4 -->
+  <!-- 3’lü Motivasyonel Su Matarası -->
   <div class="product-card" data-name="3’lü Motivasyonel Su Matarası" data-price="350" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41884046">
     <div class="added-popup">✅ Sepete eklendi!</div>
     <img src="https://i.imgur.com/2en5c9l.jpeg" alt="">
@@ -256,6 +287,7 @@ h1{
     <input type="number" value="1" min="1" max="24">
     <button>Sepete Ekle</button>
   </div>
+
 </section>
 
 <div id="cart">
@@ -343,12 +375,9 @@ document.querySelectorAll('.product-card button').forEach(btn=>{
     if(quantity>max) quantity=max;
     const color=card.querySelector('.color-select').value;
     const shipping=card.querySelector('select:nth-of-type(2)').value;
-    let extraImage=null;
-    const extraSelect = card.querySelector('.extra-image-select');
-    if(extraSelect) extraImage = extraSelect.value;
     const exists=cart.find(i=>i.name===name && i.color===color && i.shipping===shipping);
     if(exists){exists.quantity+=quantity;if(exists.quantity>max) exists.quantity=max;}
-    else{cart.push({name,price,quantity,color,shipping,shopier,extraImage});}
+    else{cart.push({name,price,quantity,color,shipping,shopier});}
     updateCart();
     const popup=card.querySelector('.added-popup');
     popup.style.display='block';
@@ -357,12 +386,21 @@ document.querySelectorAll('.product-card button').forEach(btn=>{
     lastPopup.style.display='block';
     setTimeout(()=>{lastPopup.style.display='none';},2000);
 
+    // Müşteri yorumları rastgele göster
     const reviews=["Mükemmel ürün!","Hızlı kargo, teşekkürler!","Kalitesi harika!","Tavsiye ederim.","Beklediğimden güzel çıktı!"];
     const reviewDiv=document.getElementById('reviews-popup');
     reviewDiv.textContent=`${reviews[Math.floor(Math.random()*reviews.length)]} - ${name}`;
     reviewDiv.style.display='block';
     setTimeout(()=>{reviewDiv.style.display='none';},4000);
   });
+});
+
+// ===== FIL FIGÜR IMAGE SWITCH =====
+const filSelect=document.getElementById('fil-select');
+filSelect.addEventListener('change',()=>{
+  const val=filSelect.value;
+  document.getElementById('fil-img').style.display=(val==='Fil 1')?'block':'none';
+  document.getElementById('fil-img2').style.display=(val==='Fil 2')?'block':'none';
 });
 
 // ===== CHECKOUT =====
@@ -379,6 +417,7 @@ const notificationDiv = document.getElementById('site-notification');
 const names = ["Ayşe","Fatma","Elif","Merve","Zeynep","Ali","Mehmet","Kerem"];
 const products = [
   "Kartal figürlü LED ışıklı su şelalesi",
+  "Fil figürlü LED ışıklı su şelalesi",
   "3 Bardaklı Vakumlu Termos Seti",
   "Mobgift USB’li Işıklı Ahşap Standlı Cam Küre",
   "3’lü Motivasyonel Su Matarası"

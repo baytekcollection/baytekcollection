@@ -125,7 +125,8 @@ h1{
 .product-card button:hover{
   background:#fff;
   color:#ff00ff;
-  transform:scale(1.07);
+  transform:scale(1.15) rotate(1deg);
+  box-shadow:0 0 35px #ff00ff;
 }
 
 /* ===== CART ICON ===== */
@@ -319,6 +320,21 @@ h1{
   display:none;
   z-index:9999;
 }
+
+/* ===== CUSTOMER REVIEWS POPUP ===== */
+#reviews-popup{
+  position:fixed;
+  bottom:150px;
+  right:30px;
+  background:#222;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:10px;
+  box-shadow:0 0 15px #ff00ff;
+  font-weight:700;
+  display:none;
+  z-index:9999;
+}
 </style>
 </head>
 <body>
@@ -387,7 +403,6 @@ h1{
     <input type="number" value="1" min="1" max="24">
     <button>Sepete Ekle</button>
   </div>
-
   <!-- ÜRÜN 3 -->
   <div class="product-card" data-name="Mobgift USB’li Işıklı Ahşap Standlı Cam Küre" data-price="200" data-max="52" data-shopier="https://www.shopier.com/baytekcollection/41884313">
     <div class="added-popup">✅ Sepete eklendi!</div>
@@ -447,6 +462,10 @@ h1{
 <div id="animation-container"></div>
 <a href="https://instagram.com/baytekcollection" target="_blank" id="insta-btn">📸</a>
 <div id="site-notification"></div>
+<div id="reviews-popup"></div>
+
+<!-- WhatsApp Canlı Destek -->
+<a href="https://wa.me/905334772649" target="_blank" style="position:fixed;bottom:100px;right:30px;background:#25D366;color:#fff;padding:12px 18px;border-radius:50px;font-weight:700;box-shadow:0 0 15px #25D366;z-index:9999;text-decoration:none;">💬 Canlı Destek</a>
 
 <script>
 // ===== ANIMATION BACKGROUND =====
@@ -475,7 +494,15 @@ const cartDiv=document.getElementById('cart');
 const cartTotal=document.getElementById('cart-total');
 const lastPopup=document.getElementById('last-order-popup');
 
-cartIcon.addEventListener('click',()=>{cartDiv.style.display=cartDiv.style.display==='none'?'block':'none';});
+cartIcon.addEventListener('click',()=>{
+  if(cartDiv.style.display==='none' || cartDiv.style.display===''){
+    cartDiv.style.display='block';
+    cartDiv.style.transform='translateX(0)';
+  } else {
+    cartDiv.style.transform='translateX(400px)';
+    setTimeout(()=>{cartDiv.style.display='none';},500);
+  }
+});
 
 function updateCart(){
   const ul=document.querySelector('#cart ul');
@@ -520,6 +547,13 @@ document.querySelectorAll('.product-card button').forEach(btn=>{
     lastPopup.textContent=`${name} sepete eklendi!`;
     lastPopup.style.display='block';
     setTimeout(()=>{lastPopup.style.display='none';},2000);
+
+    // Müşteri yorumları rastgele göster
+    const reviews=["Mükemmel ürün!","Hızlı kargo, teşekkürler!","Kalitesi harika!","Tavsiye ederim.","Beklediğimden güzel çıktı!"];
+    const reviewDiv=document.getElementById('reviews-popup');
+    reviewDiv.textContent=`${reviews[Math.floor(Math.random()*reviews.length)]} - ${name}`;
+    reviewDiv.style.display='block';
+    setTimeout(()=>{reviewDiv.style.display='none';},4000);
   });
 });
 
@@ -547,8 +581,22 @@ function showRandomNotification() {
   const quantity = Math.floor(Math.random() * 3) + 1; 
   notificationDiv.textContent = `${name} ${quantity} adet "${product}" aldı!`;
   notificationDiv.style.display = "block";
+  notificationDiv.style.opacity = 0;
+  let opacity=0;
+  const fadeIn = setInterval(()=>{
+    opacity+=0.1;
+    notificationDiv.style.opacity=opacity;
+    if(opacity>=1) clearInterval(fadeIn);
+  },50);
   setTimeout(() => {
-    notificationDiv.style.display = "none";
+    const fadeOut = setInterval(()=>{
+      opacity-=0.1;
+      notificationDiv.style.opacity=opacity;
+      if(opacity<=0){ 
+        clearInterval(fadeOut);
+        notificationDiv.style.display = "none";
+      }
+    },50);
   }, 4000);
 }
 setInterval(() => {

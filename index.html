@@ -14,7 +14,7 @@ body{
   text-align:center;
   overflow-x:hidden;
   position:relative;
-  padding-bottom:120px;
+  padding-bottom:150px;
 }
 header{
   padding:50px 20px;
@@ -325,6 +325,7 @@ h1{
   overflow: hidden;
   border-radius: 15px;
   box-shadow: 0 0 30px #ff00ff;
+  position:relative;
 }
 .slider-track {
   display: flex;
@@ -361,6 +362,49 @@ h1{
 .slider-buttons button:hover {
   transform: scale(1.2);
 }
+
+/* ===== FLOATING NOTIFICATIONS ===== */
+.floating-notification {
+  position: fixed;
+  bottom: 150px;
+  right: 30px;
+  background: rgba(255,0,255,0.9);
+  color: #111;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  box-shadow: 0 0 20px #ff00ff;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 0.5s ease-in-out;
+}
+.floating-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== CHECKOUT POPUP ===== */
+#checkout-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: #ff00ff;
+  color: #111;
+  padding: 20px 30px;
+  border-radius: 15px;
+  font-weight: 700;
+  text-align: center;
+  z-index: 10000;
+  box-shadow: 0 0 30px #ff00ff;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  opacity: 0;
+}
+#checkout-popup.show {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
 </style>
 </head>
 <body>
@@ -379,22 +423,105 @@ h1{
 <div id="cart-icon">🛒 <span id="cart-count">0</span></div>
 
 <section class="products">
-  <!-- ÜRÜNLER BURADA KALDI, SENİN 4 ÜRÜN CARDIN -->
-  <!-- Ürün kodları buraya kopyalanacak -->
-</section>
+  <!-- Ürün 1 -->
+  <div class="product-card" data-name="Kartal figürlü LED ışıklı su şelalesi" data-price="1200" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41882654">
+    <div class="discount">%10 İNDİRİM</div>
+    <div class="added-popup">✅ Sepete eklendi!</div>
+    <img src="https://i.imgur.com/aIAthmX.jpeg" alt="">
+    <h3>Kartal figürlü LED ışıklı su şelalesi</h3>
+    <p>Figür seçenekleri: 1 adet Fil, 2 adet Fil</p>
+    <select class="color-select">
+      <option value="1 adet Fil">1 adet Fil</option>
+      <option value="2 adet Fil">2 adet Fil</option>
+    </select>
+    <select>
+      <option value="MNG - Standart">MNG - Standart</option>
+      <option value="MNG - Hızlı">MNG - Hızlı</option>
+      <option value="Aras - Standart">Aras - Standart</option>
+      <option value="Aras - Hızlı">Aras - Hızlı</option>
+      <option value="Sürat - Standart">Sürat - Standart</option>
+      <option value="Sürat - Hızlı">Sürat - Hızlı</option>
+      <option value="PTT - Standart">PTT - Standart</option>
+      <option value="PTT - Hızlı">PTT - Hızlı</option>
+    </select>
+    <input type="number" value="1" min="1" max="24">
+    <button>Sepete Ekle</button>
+  </div>
 
-<!-- ===== SLIDER HTML ===== -->
-<div class="slider-container">
-  <div class="slider-track">
-    <div class="slide"><img src="https://i.imgur.com/Xcka2e9.jpeg" alt="Baytek Banner 1"></div>
-    <div class="slide"><img src="https://i.imgur.com/wvdZXrC.jpeg" alt="Baytek Banner 2"></div>
-    <div class="slide"><img src="https://i.imgur.com/oiAFO7w.jpeg" alt="Baytek Banner 3"></div>
+  <!-- Ürün 2 -->
+  <div class="product-card" data-name="3 Bardaklı Vakumlu Termos Seti" data-price="450" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41884160">
+    <div class="discount">%5 İNDİRİM</div>
+    <div class="added-popup">✅ Sepete eklendi!</div>
+    <img src="https://i.imgur.com/wvdZXrC.jpeg" alt="">
+    <h3>3 Bardaklı Vakumlu Termos Seti</h3>
+    <p>Renk seçenekleri: Su Yeşili, Mor, Siyah</p>
+    <select class="color-select">
+      <option value="Su Yeşili">Su Yeşili</option>
+      <option value="Mor">Mor</option>
+      <option value="Siyah">Siyah</option>
+    </select>
+    <select>
+      <option value="MNG - Standart">MNG - Standart</option>
+      <option value="MNG - Hızlı">MNG - Hızlı</option>
+      <option value="Aras - Standart">Aras - Standart</option>
+      <option value="Aras - Hızlı">Aras - Hızlı</option>
+      <option value="Sürat - Standart">Sürat - Standart</option>
+      <option value="Sürat - Hızlı">Sürat - Hızlı</option>
+      <option value="PTT - Standart">PTT - Standart</option>
+      <option value="PTT - Hızlı">PTT - Hızlı</option>
+    </select>
+    <input type="number" value="1" min="1" max="24">
+    <button>Sepete Ekle</button>
   </div>
-  <div class="slider-buttons">
-    <button id="prev">‹</button>
-    <button id="next">›</button>
+
+  <!-- Ürün 3 -->
+  <div class="product-card" data-name="Mobgift USB’li Işıklı Ahşap Standlı Cam Küre" data-price="200" data-max="52" data-shopier="https://www.shopier.com/baytekcollection/41884313">
+    <div class="added-popup">✅ Sepete eklendi!</div>
+    <img src="https://i.imgur.com/oiAFO7w.jpeg" alt="">
+    <h3>Mobgift USB’li Işıklı Ahşap Standlı Cam Küre</h3>
+    <p>Figür seçenekleri: Astronot, Melek, Galaksi</p>
+    <select class="color-select">
+      <option value="Astronot">Astronot</option>
+      <option value="Melek">Melek</option>
+      <option value="Galaksi">Galaksi</option>
+    </select>
+    <select>
+      <option value="MNG - Standart">MNG - Standart</option>
+      <option value="MNG - Hızlı">MNG - Hızlı</option>
+      <option value="Aras - Standart">Aras - Standart</option>
+      <option value="Aras - Hızlı">Aras - Hızlı</option>
+      <option value="Sürat - Standart">Sürat - Standart</option>
+      <option value="Sürat - Hızlı">Sürat - Hızlı</option>
+      <option value="PTT - Standart">PTT - Standart</option>
+      <option value="PTT - Hızlı">PTT - Hızlı</option>
+    </select>
+    <input type="number" value="1" min="1" max="52">
+    <button>Sepete Ekle</button>
   </div>
-</div>
+
+  <!-- Ürün 4 -->
+  <div class="product-card" data-name="3’lü Motivasyonel Su Matarası" data-price="350" data-max="24" data-shopier="https://www.shopier.com/baytekcollection/41884046">
+    <div class="added-popup">✅ Sepete eklendi!</div>
+    <img src="https://i.imgur.com/2en5c9l.jpeg" alt="">
+    <h3>3’lü Motivasyonel Su Matarası</h3>
+    <p>Renk seçenekleri: Siyah</p>
+    <select class="color-select">
+      <option value="Siyah">Siyah</option>
+    </select>
+    <select>
+      <option value="MNG - Standart">MNG - Standart</option>
+      <option value="MNG - Hızlı">MNG - Hızlı</option>
+      <option value="Aras - Standart">Aras - Standart</option>
+      <option value="Aras - Hızlı">Aras - Hızlı</option>
+      <option value="Sürat - Standart">Sürat - Standart</option>
+      <option value="Sürat - Hızlı">Sürat - Hızlı</option>
+      <option value="PTT - Standart">PTT - Standart</option>
+      <option value="PTT - Hızlı">PTT - Hızlı</option>
+    </select>
+    <input type="number" value="1" min="1" max="24">
+    <button>Sepete Ekle</button>
+  </div>
+</section>
 
 <div id="cart">
   <h2>Sepet <span id="cart-total">0₺</span></h2>
@@ -406,6 +533,7 @@ h1{
 <div id="animation-container"></div>
 <a href="https://instagram.com/baytekcollection" target="_blank" id="insta-btn">📸</a>
 <div id="site-notification"></div>
+<div id="checkout-popup"></div>
 
 <script>
 // ===== ANIMATION BACKGROUND =====
@@ -457,137 +585,79 @@ function updateCart(){
   });
 }
 
-// ===== SLIDER LOGIC =====
-const sliderTrack = document.querySelector('.slider-track');
-const slides = document.querySelectorAll('.slide');
-let currentIndex = 0;
+// Dinamik ürün ekleme event
+document.querySelectorAll('.product-card button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const card=btn.parentElement;
+    const name=card.getAttribute('data-name');
+    const price=Number(card.getAttribute('data-price'));
+    const max=Number(card.getAttribute('data-max'));
+    const shopier=card.getAttribute('data-shopier');
+    let quantity=Number(card.querySelector('input').value);
+    if(quantity>max) quantity=max;
+    const color=card.querySelector('.color-select').value;
+    const shipping=card.querySelector('select:nth-of-type(2)').value;
+    const exists=cart.find(i=>i.name===name && i.color===color && i.shipping===shipping);
+    if(exists){exists.quantity+=quantity;if(exists.quantity>max) exists.quantity=max;}
+    else{cart.push({name,price,quantity,color,shipping,shopier});}
+    updateCart();
+    const popup=card.querySelector('.added-popup');
+    popup.style.display='block';
+    setTimeout(()=>{popup.style.display='none';},1000);
+    lastPopup.textContent=`${name} sepete eklendi!`;
+    lastPopup.style.display='block';
+    setTimeout(()=>{lastPopup.style.display='none';},2000);
 
-document.getElementById('next').addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % slides.length;
-  sliderTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
-});
-
-document.getElementById('prev').addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-  sliderTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
-});
-</script>
-<!-- ===== CHECKOUT POPUP HTML ===== -->
-<div id="checkout-popup">✅ Ödeme tamamlandı! Teşekkürler.</div>
-
-<style>
-/* ===== CHECKOUT POPUP ANIMATIONS ===== */
-#checkout-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background: #ff00ff;
-  color: #111;
-  padding: 20px 30px;
-  border-radius: 15px;
-  font-weight: 700;
-  text-align: center;
-  z-index: 10000;
-  box-shadow: 0 0 30px #ff00ff;
-  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-  opacity: 0;
-}
-#checkout-popup.show {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-}
-
-/* ===== FLOATING NOTIFICATIONS ===== */
-.floating-notification {
-  position: fixed;
-  bottom: 150px;
-  right: 30px;
-  background: rgba(255,0,255,0.9);
-  color: #111;
-  padding: 12px 18px;
-  border-radius: 10px;
-  font-weight: 700;
-  box-shadow: 0 0 20px #ff00ff;
-  z-index: 9999;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: 0.5s ease-in-out;
-}
-.floating-notification.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>
-
-<script>
-// ===== SITE ORDER NOTIFICATION =====
-const notificationDiv = document.getElementById('site-notification');
-const names = ["Ayşe","Fatma","Elif","Merve","Zeynep","Ali","Mehmet","Kerem"];
-const products = [
-  "Kartal figürlü LED ışıklı su şelalesi",
-  "3 Bardaklı Vakumlu Termos Seti",
-  "Mobgift USB’li Işıklı Ahşap Standlı Cam Küre",
-  "3’lü Motivasyonel Su Matarası"
-];
-
-// Random floating notification
-function showFloatingNotification(name, product, quantity) {
-  const div = document.createElement('div');
-  div.className = 'floating-notification show';
-  div.textContent = `${name} ${quantity} adet "${product}" aldı!`;
-  document.body.appendChild(div);
-  setTimeout(() => {
-    div.classList.remove('show');
-    setTimeout(() => div.remove(), 500);
-  }, 4000);
-}
-
-// Random bildirimleri simüle et
-setInterval(() => {
-  const name = names[Math.floor(Math.random() * names.length)];
-  const product = products[Math.floor(Math.random() * products.length)];
-  const quantity = Math.floor(Math.random() * 3) + 1;
-  showFloatingNotification(name, product, quantity);
-}, Math.random() * 5000 + 7000);
-
-// ===== CHECKOUT AND WHATSAPP LOGIC =====
-const checkoutPopup = document.getElementById('checkout-popup');
-const whatsappNumbers = ["905334772649","905511122791"]; // WhatsApp numaraları
-
-// Sepete ürün ekleme sonrası WhatsApp bildirimi
-document.querySelectorAll('.product-card button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const card = btn.parentElement;
-    const name = card.getAttribute('data-name');
-    const quantity = Number(card.querySelector('input').value);
-    
+    // WhatsApp bildirimi
+    const whatsappNumbers = ["905334772649","905511122791"];
     const randomNumber = whatsappNumbers[Math.floor(Math.random() * whatsappNumbers.length)];
     const message = encodeURIComponent(`${name} ürünü sepete eklendi. Adet: ${quantity}`);
     window.open(`https://wa.me/${randomNumber}?text=${message}`, '_blank');
   });
 });
 
-// Checkout sonrası WhatsApp ve Shopier yönlendirmesi
-document.getElementById('checkout').addEventListener('click', () => {
-  if(cart.length === 0){ alert('Sepet boş!'); return; }
-
-  cart.forEach(item => {
+// ===== CHECKOUT =====
+const checkoutPopup = document.getElementById('checkout-popup');
+const whatsappNumbers = ["905334772649","905511122791"];
+document.getElementById('checkout').addEventListener('click',()=>{
+  if(cart.length===0){alert('Sepet boş!'); return;}
+  cart.forEach(item=>{
     const randomNumber = whatsappNumbers[Math.floor(Math.random() * whatsappNumbers.length)];
     const message = encodeURIComponent(`Sipariş alındı: ${item.name}, Adet: ${item.quantity}, Renk: ${item.color}, Kargo: ${item.shipping}`);
     window.open(`https://wa.me/${randomNumber}?text=${message}`, '_blank');
-
-    // Shopier sayfasına yönlendirme
     window.open(item.shopier,'_blank');
   });
-
-  // Checkout popup
   checkoutPopup.classList.add('show');
-  setTimeout(() => checkoutPopup.classList.remove('show'), 3000);
-
-  cart = [];
+  setTimeout(()=>checkoutPopup.classList.remove('show'),3000);
+  cart=[];
   updateCart();
 });
+
+// ===== SITE ORDER NOTIFICATION =====
+const notificationDiv = document.getElementById('site-notification');
+const namesList = ["Ayşe","Fatma","Elif","Merve","Zeynep","Ali","Mehmet","Kerem"];
+const productsList = [
+  "Kartal figürlü LED ışıklı su şelalesi",
+  "3 Bardaklı Vakumlu Termos Seti",
+  "Mobgift USB’li Işıklı Ahşap Standlı Cam Küre",
+  "3’lü Motivasyonel Su Matarası"
+];
+function showFloatingNotification(name, product, quantity){
+  const div=document.createElement('div');
+  div.className='floating-notification show';
+  div.textContent=`${name} ${quantity} adet "${product}" aldı!`;
+  document.body.appendChild(div);
+  setTimeout(()=>{
+    div.classList.remove('show');
+    setTimeout(()=>div.remove(),500);
+  },4000);
+}
+setInterval(()=>{
+  const name = namesList[Math.floor(Math.random()*namesList.length)];
+  const product = productsList[Math.floor(Math.random()*productsList.length)];
+  const quantity = Math.floor(Math.random()*3)+1;
+  showFloatingNotification(name, product, quantity);
+}, Math.random()*5000+7000);
 </script>
 </body>
 </html>

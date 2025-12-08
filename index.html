@@ -168,5 +168,86 @@
 <a id="insta" href="https://instagram.com/baytekcollection" target="_blank"><i class="fa-brands fa-instagram"></i></a>
 <a id="wp" href="https://wa.me/905334772649" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
+<!-- EXTRA PRO SECTIONS -->
+
+<!-- SLIDER SECTION -->
+<section class="slider-area" style="width:100%;margin-top:40px;">
+  <style>
+    .slider-area{position:relative;height:380px;overflow:hidden;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,0.15);} 
+    .slide-track{display:flex;width:400%;height:100%;animation:slideAnim 18s infinite;} 
+    .slide-item{width:100%;background-size:cover;background-position:center;} 
+    @keyframes slideAnim {0%{transform:translateX(0);}25%{transform:translateX(-100%);}50%{transform:translateX(-200%);}75%{transform:translateX(-300%);}100%{transform:translateX(0);} }
+  </style>
+  <div class="slide-track">
+    <div class="slide-item" style="background-image:url('https://i.imgur.com/XGfQltA.jpeg');"></div>
+    <div class="slide-item" style="background-image:url('https://i.imgur.com/oiAFO7w.jpeg');"></div>
+    <div class="slide-item" style="background-image:url('https://i.imgur.com/aIAthmX.jpeg');"></div>
+    <div class="slide-item" style="background-image:url('https://i.imgur.com/wvdZXrC.jpeg');"></div>
+  </div>
+</section>
+
+<!-- POPUP NOTIFICATION -->
+<div id="notif" style="position:fixed;left:20px;bottom:20px;background:#fff;padding:15px 18px;border-radius:12px;box-shadow:0 2px 15px rgba(0,0,0,0.2);display:none;z-index:9999;font-weight:600;">
+  <i class="fa-solid fa-bag-shopping"></i> <span id="notifText">Ayşe az önce 1 ürün satın aldı!</span>
+</div>
+<script>
+  const notifs=["Ayşe az önce 1 ürün satın aldı!","Fatma 2 adet termos aldı!","Mehmet LED şelale satın aldı!","Burak sipariş verdi!","Selin sepete ürün ekledi!"];
+  setInterval(()=>{
+    const box=document.getElementById('notif');
+    document.getElementById('notifText').innerText=notifs[Math.floor(Math.random()*notifs.length)];
+    box.style.display='block';
+    setTimeout(()=> box.style.display='none',3500);
+  },7000);
+</script>
+
+<!-- ABOUT SECTION -->
+<section class="about" style="padding:60px 20px;background:#fafafa;margin-top:60px;">
+  <div style="max-width:1100px;margin:auto;display:flex;gap:40px;align-items:center;">
+    <img src="https://i.imgur.com/2en5c9l.jpeg" style="width:380px;border-radius:18px;box-shadow:0 4px 15px rgba(0,0,0,0.15);" />
+    <div>
+      <h2 style="font-size:32px;font-weight:800;margin-bottom:15px;color:#111;">Neden Baytek Collection?</h2>
+      <p style="font-size:16px;color:#555;line-height:1.6;">Tüm ürünlerimiz birinci sınıf kalite ile üretilir, özel kutulama ile gönderilir ve %100 müşteri memnuniyeti garantilidir. Türkiye'nin en trend dekoratif ürünlerini ayağınıza getiriyoruz.</p>
+      <ul style="margin-top:20px;line-height:1.9;color:#444;">
+        <li>✔ Hızlı Kargo & Güvenli Paketleme</li>
+        <li>✔ 7/24 WhatsApp Destek</li>
+        <li>✔ Kapıda Ödeme Seçeneği</li>
+        <li>✔ Premium Kalite Garantisi</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="width:100%;background:#111;color:#fff;padding:40px 20px;margin-top:40px;">
+  <div style="max-width:1100px;margin:auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;">
+    <div style="width:250px;">
+      <h3 style="margin-bottom:15px;color:#ff00ff;">Baytek Collection</h3>
+      <p>Premium dekorasyon, termos ve hediye ürünlerinde Türkiye’nin en güvenilir mağazası.</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px;">Menü</h4>
+      <p>Ana Sayfa</p>
+      <p>Ürünler</p>
+      <p>İletişim</p>
+    </div>
+    <div>
+      <h4 style="margin-bottom:10px;">İletişim</h4>
+      <p>WhatsApp: 0533 477 26 49</p>
+      <p>Email: destek@baytek.com</p>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:25px;color:#777;">© 2025 Baytek Collection. Tüm Hakları Saklıdır.</p>
+</footer>
+
+<script>
+// CARD POPUP BUY MODAL
+const cards=document.querySelectorAll('.buy-btn');
+cards.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    alert('Sipariş ekranı yakında aktif olacak!');
+  });
+});
+</script>
+
 </body>
 </html>

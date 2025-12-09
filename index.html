@@ -6,16 +6,6 @@
 <title>Baytek Collection — Premium Mağaza</title>
 <meta name="description" content="Baytek Collection — Güvenilir alışveriş, hızlı kargo, premium tasarım." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
-<!--
-  --- BAYTEK COLLECTION: SINGLE-FILE PREMIUM STORE ---
-  This file contains:
-   - 4 products only (no duplicates)
-   - Shopier checkout links (data-shopier on products)
-   - Contact info: Kerim Bayraktar (primary) + Enes Tekin
-   - Advanced UX: product modal, cart, filters, sticky checkout, testimonials, SSS, trust badges
-   - Extensive CSS, JS and comments to reach +2000 lines as requested
-  Save as index.html and open in browser.
--->
 <style>
 /* ===== GLOBAL RESET & THEME ===== */
 :root{
@@ -31,9 +21,10 @@
   --shadow: 0 12px 36px rgba(0,0,0,0.6);
   --radius:12px;
   --maxwidth:1280px;
+  --nav-active-bg: rgba(255,138,0,0.12);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:var(--bg);color:#eaeaea;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale; line-height:1.45; font-size:15px}
+html,body{height:100%;background:var(--bg);color:#eaeaea;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale; line-height:1.45; font-size:15px; scroll-behavior:smooth}
 a{color:inherit}
 .container{max-width:var(--maxwidth);margin:0 auto;padding:22px;position:relative;z-index:5}
 
@@ -53,6 +44,7 @@ body::before{
 .topnav{display:flex;gap:8px;align-items:center}
 .topnav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:700}
 .topnav a:hover{background:rgba(255,138,0,0.06);color:#fff}
+.topnav a.active{background:var(--nav-active-bg);color:var(--accent);outline:1px solid rgba(255,138,0,0.06)}
 .icon-btn{background:linear-gradient(90deg,var(--accent),#ff6a00);color:#070707;padding:8px 12px;border-radius:10px;font-weight:900;display:inline-flex;align-items:center;gap:8px}
 
 /* small responsive helpers */
@@ -134,10 +126,6 @@ body::before{
 @keyframes fadeIn{to{opacity:1;transform:none}}
 
 /* ===== LONG FORM: extra styles and utility classes (to increase file size per request) ===== */
-/* The following section contains extended utility classes, repeated descriptive selectors,
-   and alternative color-scheme helpers used later in the page for micro-interactions.
-   These are intentionally verbose to provide a professional, maintainable single-file structure. */
-
 .u-mt-4{margin-top:16px}
 .u-mt-8{margin-top:32px}
 .u-mb-4{margin-bottom:16px}
@@ -169,7 +157,7 @@ body::before{
       </div>
     </div>
 
-    <nav class="topnav" aria-label="Ana menü">
+    <nav class="topnav" aria-label="Ana menü" id="mainNav">
       <a href="#products">Ürünler</a>
       <a href="#kategoriler">Kategoriler</a>
       <a href="#ozellikler">Özellikler</a>
@@ -277,7 +265,7 @@ body::before{
 <div class="container grid-wrap" id="mainGrid">
 
   <!-- PRODUCTS GRID (4 products only) -->
-  <section style="min-height:200px" aria-labelledby="productsLabel">
+  <section style="min-height:200px" aria-labelledby="productsLabel" id="products">
     <h2 id="productsLabel" class="small" style="margin-bottom:12px">Ürünlerimiz (4 adet)</h2>
     <div class="grid" id="productsGrid">
 
@@ -399,13 +387,13 @@ body::before{
 
 <!-- FAQ + About -->
 <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px">
-  <div class="card">
+  <div class="card" id="kategoriler">
     <h3>Hakkımızda</h3>
     <p style="color:var(--muted)">Baytek Collection, seçkin ürünleri özenle seçip müşterilerine sunan bir platformdur. Kalite, güven ve hızlı teslimat önceliğimizdir.</p>
     <p style="margin-top:10px;color:var(--muted)">Misyonumuz: Uygun fiyatla premium deneyim sunmak. Vizyonumuz: Türkiye genelinde tanınan güvenilir bir mağaza olmak.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="sss">
     <h3>Sıkça Sorulanlar</h3>
     <div style="margin-top:8px">
       <div style="font-weight:800;margin-bottom:6px">Sipariş takip nasıl yapılır?</div>
@@ -434,7 +422,7 @@ body::before{
   <ul style="list-style:none;margin-top:10px;color:var(--muted)">
     <li><strong>Kerim Bayraktar (İsim öncelikli):</strong> <a href="tel:+905334772649" style="color:var(--accent)">0533 477 26 49</a> — WhatsApp için: <a href="https://wa.me/905334772649" target="_blank" style="color:var(--accent)">Mesaj Gönder</a></li>
     <li style="margin-top:8px"><strong>Enes Tekin:</strong> <a href="tel:+905511112279" style="color:var(--accent)">0551 112 27 91</a> — WhatsApp: <a href="https://wa.me/905511112279" target="_blank" style="color:var(--accent)">Mesaj Gönder</a></li>
-    <li style="margin-top:8px"><strong>Email:</strong> <a href="mailto:info@baytekcollection.com" style="color:var(--accent)">info@baytekcollection.com</a></li>
+    <li style="margin-top:8px"><strong>Email:</strong> <a href="mailto:kerimdjis@gmail.com" style="color:var(--accent)">kerimdjis@gmail.com</a></li>
   </ul>
 
   <div style="margin-top:18px;color:var(--muted);font-size:13px">
@@ -507,6 +495,7 @@ body::before{
   - Product detail modal
   - Filters & sort
   - Checkout (opens shopier links per item on checkout)
+  - Smooth scroll + active nav highlighting (yeni: aktif hale getirme)
   - Notifications and small UX
 */
 
@@ -636,7 +625,6 @@ $('#checkout').addEventListener('click', ()=>{
   // For each item with shopier link, open shopier checkout
   cart.forEach(item=>{
     if(item.shopier && item.shopier !== '#') {
-      // For UX: append quantity param if possible? Shopier simple open
       window.open(item.shopier, '_blank');
     }
   });
@@ -729,6 +717,52 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
 }, appearOptions);
 faders.forEach(f=>{ appearOnScroll.observe(f); });
 
+/* ===== NAV: Smooth scrolling + active item on scroll ===== */
+(function navActiveOnScroll(){
+  const nav = document.getElementById('mainNav');
+  if(!nav) return;
+  const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+  const sections = links.map(l => {
+    const id = l.getAttribute('href').replace('#','');
+    return document.getElementById(id);
+  });
+
+  // click handler: smooth scroll (native scroll-behavior is set), close mobile if needed
+  links.forEach(l => {
+    l.addEventListener('click', (e) => {
+      // default anchor works because scroll-behavior:smooth, but ensure focus for accessibility
+      const targetId = l.getAttribute('href').substring(1);
+      const target = document.getElementById(targetId);
+      if(target){
+        e.preventDefault();
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+        // update active immediately
+        links.forEach(x=>x.classList.remove('active'));
+        l.classList.add('active');
+        // set focusable target for keyboard users
+        target.setAttribute('tabindex','-1');
+        target.focus({preventScroll:true});
+        // remove temporary tabindex after short delay
+        setTimeout(()=>target.removeAttribute('tabindex'),800);
+      }
+    });
+  });
+
+  // on scroll: highlight the currently visible section (using IntersectionObserver)
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      const id = entry.target.id;
+      links.forEach(link => {
+        if(link.getAttribute('href') === `#${id}`) link.classList.add('active');
+        else link.classList.remove('active');
+      });
+    });
+  }, { threshold: 0.45 });
+
+  sections.forEach(s => { if(s) io.observe(s); });
+})();
+
 /* ===== Small analytics-like counters (purely frontend) ===== */
 (function counters(){
   try{
@@ -747,39 +781,7 @@ faders.forEach(f=>{ appearOnScroll.observe(f); });
 /* ===== End of JS ===== */
 </script>
 
-<!--
-  Extra long comment block to increase file length while keeping content useful.
-  The following section contains repeated documentation, usage notes, and
-  developer tips that are helpful for future edits. Keeping it inside the same file
-  as comments ensures the single-file requirement while remaining non-intrusive.
--->
-
-<!--
-  DEVELOPER NOTES:
-  - To update product details, edit the <article class="card"> blocks above.
-  - Each product has attributes:
-      data-cat (category)
-      data-price (numeric price)
-      data-color (primary color)
-      data-name (display name)
-      data-max (stock)
-      data-shopier (Shopier checkout URL)
-  - Checkout behavior: clicking "Siparişi Tamamla" opens each product's shopier URL in a new tab.
-  - Modal: Uses data attributes from product card to show details. 'Detay' buttons trigger modal.
-  - Contact numbers are Kerim (primary) and Enes (secondary). For WhatsApp quick links, use https://wa.me/90533...
-  - Styles: variables defined at top. To change theme, alter the :root values.
-  - Accessibility: aria labels added to main landmarks. Modal supports ESC to close.
-  - To add analytics: include GA orsimilar and place script before </body>.
--->
-
-<!--
-  LONG FOOTER NOTES:
-  The structure below repeats some content in small variations for SEO and clarity.
-  This is intentionally verbose to reach the requested +2000 lines while remaining
-  relevant: providing policy blocks, returns, shipping details, contact and corporate info.
--->
-
-<section style="padding:32px 22px;background:linear-gradient(180deg,#060606,#070707);border-top:1px solid rgba(255,255,255,0.02);margin-top:28px">
+<section style="padding:32px 22px;background:linear-gradient(180deg,#060606,#070707);border-top:1px solid rgba(255,255,255,0.02);margin-top:28px" id="ozellikler">
   <div class="container" style="display:grid;grid-template-columns:2fr 1fr;gap:28px">
     <div>
       <h3 style="color:var(--accent)">Kargo & İade Bilgileri</h3>
@@ -805,7 +807,8 @@ faders.forEach(f=>{ appearOnScroll.observe(f); });
   "sameAs":["https://instagram.com/baytekcollection"],
   "description":"Baytek Collection — Güvenilir alışveriş, hızlı kargo, premium tasarım.",
   "telephone":"+905334772649",
-  "address":{"@type":"PostalAddress","addressLocality":"Türkiye"}
+  "address":{"@type":"PostalAddress","addressLocality":"Türkiye"},
+  "email":"kerimdjis@gmail.com"
 }
 </script>
 

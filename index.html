@@ -17,54 +17,49 @@
    ==========================================================================
 */
 :root {
-    /* Color Palette - Baytek Orange & Dark Mode Base */
     --color-primary: #ff8a00;
     --color-primary-dark: #cc6e00;
     --color-primary-light: rgba(255, 138, 0, 0.1);
-    
+
     --bg-body: #090909;
     --bg-surface: #121212;
     --bg-card: #1a1a1a;
     --bg-input: #242424;
     --bg-hover: #2a2a2a;
-    
+
     --text-main: #ffffff;
     --text-secondary: #a1a1a1;
     --text-muted: #666666;
-    
+
     --border-color: #2a2a2a;
     --border-focus: #ff8a00;
-    
+
     --status-success: #00d16d;
     --status-error: #ff4757;
     --status-warning: #ffa502;
     --status-info: #3742fa;
 
-    /* Spacing System */
     --space-xs: 4px;
     --space-sm: 8px;
     --space-md: 16px;
     --space-lg: 24px;
     --space-xl: 32px;
     --space-2xl: 48px;
-    
-    /* Layout */
+
     --container-width: 1280px;
     --header-height: 85px;
     --mobile-nav-height: 60px;
-    
-    /* Borders & Shadows */
+
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 16px;
     --radius-full: 9999px;
-    
+
     --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
     --shadow-md: 0 4px 12px rgba(0,0,0,0.2);
     --shadow-lg: 0 10px 25px rgba(0,0,0,0.5);
     --shadow-glow: 0 0 15px rgba(255, 138, 0, 0.3);
-    
-    /* Transitions */
+
     --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
     --duration-fast: 0.2s;
     --duration-normal: 0.3s;
@@ -77,10 +72,7 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-html {
-    font-size: 16px;
-    scroll-behavior: smooth;
-}
+html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
     background-color: var(--bg-body);
@@ -88,7 +80,7 @@ body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     line-height: 1.5;
     overflow-x: hidden;
-    padding-bottom: var(--mobile-nav-height); /* Mobile nav padding */
+    padding-bottom: var(--mobile-nav-height);
 }
 
 a { text-decoration: none; color: inherit; transition: color var(--duration-fast); }
@@ -97,21 +89,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 img { display: block; max-width: 100%; height: auto; }
 input, select, textarea { font-family: inherit; outline: none; }
 
-/* Scrollbar Customization */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-body); }
 ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
 
 /* ==========================================================================
-   2. UTILITY CLASSES (Grid, Flex, Typography)
+   2. UTILITY CLASSES
    ==========================================================================
 */
-.container {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0 var(--space-md);
-}
+.container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--space-md); }
 
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
@@ -120,10 +107,13 @@ input, select, textarea { font-family: inherit; outline: none; }
 .justify-center { justify-content: center; }
 .justify-between { justify-content: space-between; }
 .justify-end { justify-content: flex-end; }
+
 .gap-xs { gap: var(--space-xs); }
 .gap-sm { gap: var(--space-sm); }
 .gap-md { gap: var(--space-md); }
 .gap-lg { gap: var(--space-lg); }
+/* ✅ Eksik class (register form kullanıyordu) */
+.gap-10 { gap: 10px; }
 
 .grid { display: grid; }
 .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
@@ -165,12 +155,14 @@ input, select, textarea { font-family: inherit; outline: none; }
 .hidden { display: none !important; }
 .block { display: block; }
 
+/* ✅ Eksik olanlar */
+.mb-4 { margin-bottom: 1rem; }
+.opacity-50 { opacity: .5; }
+
 /* ==========================================================================
-   3. COMPONENTS (Buttons, Inputs, Badges, Cards)
+   3. COMPONENTS
    ==========================================================================
 */
-
-/* Buttons */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -183,7 +175,6 @@ input, select, textarea { font-family: inherit; outline: none; }
     gap: 8px;
     white-space: nowrap;
 }
-
 .btn-primary {
     background-color: var(--color-primary);
     color: #000;
@@ -222,7 +213,6 @@ input, select, textarea { font-family: inherit; outline: none; }
     color: var(--color-primary);
 }
 
-/* Form Elements */
 .form-group { margin-bottom: 15px; }
 .form-label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-secondary); }
 .form-control {
@@ -242,7 +232,6 @@ input, select, textarea { font-family: inherit; outline: none; }
 .form-control.error { border-color: var(--status-error); }
 .form-error-text { color: var(--status-error); font-size: 0.75rem; margin-top: 4px; display: none; }
 
-/* Badges */
 .badge {
     padding: 4px 8px;
     border-radius: 4px;
@@ -255,7 +244,6 @@ input, select, textarea { font-family: inherit; outline: none; }
 .badge-sale { background: var(--status-error); color: #fff; }
 .badge-fast { background: var(--status-success); color: #fff; }
 
-/* Toast Notification */
 .toast-container {
     position: fixed;
     top: 20px;
@@ -281,6 +269,9 @@ input, select, textarea { font-family: inherit; outline: none; }
 }
 .toast.success { border-color: var(--status-success); }
 .toast.error { border-color: var(--status-error); }
+/* ✅ Eksik: info tipi */
+.toast.info { border-color: var(--status-info); }
+
 .toast-content h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
 .toast-content p { font-size: 0.8rem; color: var(--text-secondary); }
 
@@ -293,11 +284,9 @@ input, select, textarea { font-family: inherit; outline: none; }
 }
 
 /* ==========================================================================
-   4. LAYOUT SECTIONS (Header, Nav, Footer)
+   4. LAYOUT
    ==========================================================================
 */
-
-/* Top Strip */
 .top-strip {
     background-color: #000;
     border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -307,7 +296,6 @@ input, select, textarea { font-family: inherit; outline: none; }
 }
 .top-strip a:hover { color: #fff; text-decoration: underline; }
 
-/* Main Header */
 .main-header {
     background: rgba(9, 9, 9, 0.95);
     backdrop-filter: blur(10px);
@@ -331,7 +319,6 @@ input, select, textarea { font-family: inherit; outline: none; }
 }
 .brand-logo span { color: var(--color-primary); font-size: 32px; line-height: 0; margin-bottom: 10px; }
 
-/* Search Bar */
 .search-wrapper {
     flex: 1;
     max-width: 600px;
@@ -361,7 +348,6 @@ input, select, textarea { font-family: inherit; outline: none; }
     color: var(--text-muted);
 }
 
-/* Header Actions */
 .header-actions { display: flex; gap: 15px; align-items: center; }
 .action-item {
     display: flex;
@@ -393,14 +379,12 @@ input, select, textarea { font-family: inherit; outline: none; }
     box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     animation: bounceIn 0.3s;
 }
-
 @keyframes bounceIn {
     0% { transform: scale(0); }
     80% { transform: scale(1.2); }
     100% { transform: scale(1); }
 }
 
-/* Mobile Nav */
 .mobile-nav {
     display: none;
     position: fixed;
@@ -411,7 +395,7 @@ input, select, textarea { font-family: inherit; outline: none; }
     backdrop-filter: blur(10px);
     border-top: 1px solid var(--border-color);
     z-index: 1001;
-    padding: 8px 0 20px; /* Safe area padding */
+    padding: 8px 0 20px;
     justify-content: space-around;
 }
 .mobile-nav-item {
@@ -427,13 +411,10 @@ input, select, textarea { font-family: inherit; outline: none; }
 .mobile-nav-item svg { width: 24px; height: 24px; }
 
 /* ==========================================================================
-   5. HERO SECTION & SLIDER
+   5. HERO
    ==========================================================================
 */
-.hero-section {
-    margin-top: 20px;
-    margin-bottom: 40px;
-}
+.hero-section { margin-top: 20px; margin-bottom: 40px; }
 .hero-slider-container {
     position: relative;
     border-radius: var(--radius-lg);
@@ -497,7 +478,6 @@ input, select, textarea { font-family: inherit; outline: none; }
     margin-bottom: 30px;
     line-height: 1.6;
 }
-
 .slider-nav {
     position: absolute;
     bottom: 20px;
@@ -518,7 +498,7 @@ input, select, textarea { font-family: inherit; outline: none; }
 .slider-dot.active { background: var(--color-primary); width: 30px; border-radius: 10px; }
 
 /* ==========================================================================
-   6. PRODUCT LISTING & SIDEBAR
+   6. PRODUCTS & SIDEBAR
    ==========================================================================
 */
 .page-layout {
@@ -527,8 +507,6 @@ input, select, textarea { font-family: inherit; outline: none; }
     gap: 30px;
     margin-bottom: 60px;
 }
-
-/* Sidebar Filter */
 .sidebar {
     position: sticky;
     top: 110px;
@@ -577,7 +555,6 @@ input, select, textarea { font-family: inherit; outline: none; }
     font-weight: 800;
 }
 
-/* Product Grid */
 .products-header {
     display: flex;
     justify-content: space-between;
@@ -596,14 +573,12 @@ input, select, textarea { font-family: inherit; outline: none; }
     border-radius: 6px;
     cursor: pointer;
 }
-
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 20px;
 }
 
-/* Product Card */
 .product-card {
     background: var(--bg-card);
     border-radius: var(--radius-md);
@@ -650,7 +625,7 @@ input, select, textarea { font-family: inherit; outline: none; }
 
 .card-img-wrapper {
     position: relative;
-    padding-top: 120%; /* 5:6 Aspect Ratio */
+    padding-top: 120%;
     background: #202020;
     overflow: hidden;
 }
@@ -689,7 +664,7 @@ input, select, textarea { font-family: inherit; outline: none; }
 .card-rating {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     font-size: 12px;
     color: var(--status-warning);
     margin-bottom: 12px;
@@ -736,7 +711,6 @@ input, select, textarea { font-family: inherit; outline: none; }
 }
 .overlay.active { opacity: 1; visibility: visible; }
 
-/* Right Drawer (Cart/Favorites) */
 .drawer {
     position: fixed;
     top: 0;
@@ -769,7 +743,6 @@ input, select, textarea { font-family: inherit; outline: none; }
     background: var(--bg-card);
 }
 
-/* Cart Item */
 .cart-item {
     display: flex;
     gap: 15px;
@@ -784,11 +757,10 @@ input, select, textarea { font-family: inherit; outline: none; }
 .cart-item-meta { font-size: 12px; color: var(--text-secondary); }
 .cart-item-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; }
 .qty-control { display: flex; align-items: center; gap: 8px; background: var(--bg-input); padding: 4px; border-radius: 4px; }
-.qty-btn { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; }
+.qty-btn { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; user-select:none; }
 .cart-item-price { font-weight: 700; color: var(--color-primary); }
 .cart-remove-btn { color: var(--status-error); font-size: 12px; cursor: pointer; }
 
-/* Auth Modal */
 .modal-container {
     position: fixed;
     top: 50%;
@@ -820,6 +792,11 @@ input, select, textarea { font-family: inherit; outline: none; }
 .auth-tab.active { color: var(--color-primary); border-color: var(--color-primary); background: var(--bg-surface); }
 .auth-body { padding: 30px; }
 .auth-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; text-align: center; }
+
+/* ✅ Mobil arama modali */
+.search-modal-body { padding: 22px; }
+.search-modal-title { font-size: 16px; font-weight: 800; margin-bottom: 12px; text-align: center; }
+.search-modal-hint { font-size: 12px; color: var(--text-secondary); text-align:center; margin-top:10px; }
 
 /* ==========================================================================
    8. FOOTER
@@ -854,41 +831,54 @@ footer {
 .social-btn:hover { background: var(--color-primary); color: #000; transform: translateY(-3px); }
 
 /* ==========================================================================
-   9. RESPONSIVE DESIGN
+   9. RESPONSIVE
    ==========================================================================
 */
 @media (max-width: 1024px) {
     .page-layout { grid-template-columns: 1fr; }
-    .sidebar { display: none; } /* Hide sidebar on small screens for this demo */
+    .sidebar { display: none; }
     .hero-slider-container { height: 300px; }
     .hero-title { font-size: 32px; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
 }
-
 @media (max-width: 768px) {
     .top-strip, .search-wrapper { display: none; }
-    .header-actions { display: none; } /* Move to bottom nav */
+    .header-actions { display: none; }
     .mobile-nav { display: flex; }
     .hero-slide { padding: 0 20px; }
     .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .modal-container { width: 90%; }
     .drawer { width: 100%; }
 }
-
 </style>
 </head>
 <body>
 
 <div class="overlay" id="globalOverlay" onclick="app.closeAll()"></div>
-
 <div class="toast-container" id="toastArea"></div>
+
+<!-- ✅ Mobil Arama Modali -->
+<div class="modal-container" id="searchModal">
+    <div class="auth-header">
+        <div class="auth-tab active" style="cursor:default;">Ara</div>
+        <div class="auth-tab" onclick="app.closeAll()">Kapat</div>
+    </div>
+    <div class="search-modal-body">
+        <div class="search-modal-title">Ürün / Kategori Ara</div>
+        <input type="text" class="form-control" id="mobileSearchInput" placeholder="Örn: termos, hediye, dekor..." autocomplete="off">
+        <div class="search-modal-hint">Yazdıkça sonuçlar aşağıda güncellenir.</div>
+        <div style="margin-top:14px;">
+            <button class="btn btn-outline w-full" onclick="app.clearSearch()">Temizle</button>
+        </div>
+    </div>
+</div>
 
 <div class="modal-container" id="authModal">
     <div class="auth-header">
         <div class="auth-tab active" onclick="app.switchAuth('login')">Giriş Yap</div>
         <div class="auth-tab" onclick="app.switchAuth('register')">Üye Ol</div>
     </div>
-    
+
     <div class="auth-body" id="loginForm">
         <h3 class="auth-title">Hoşgeldiniz</h3>
         <form onsubmit="app.handleLogin(event)">
@@ -941,12 +931,11 @@ footer {
         <div class="drawer-title">Sepetim (<span id="cartCountHeader">0</span>)</div>
         <div class="drawer-close" onclick="app.closeAll()">&times;</div>
     </div>
-    <div class="drawer-content" id="cartContent">
-        </div>
+    <div class="drawer-content" id="cartContent"></div>
     <div class="drawer-footer" id="cartFooter">
         <div class="flex justify-between items-center mb-4" style="margin-bottom:15px">
             <span class="text-secondary">Toplam Tutar</span>
-            <span class="text-xl font-bold text-primary" id="cartTotal">0.00 TL</span>
+            <span class="text-xl font-bold text-primary" id="cartTotal">0,00 TL</span>
         </div>
         <button class="btn btn-primary w-full">SEPETİ ONAYLA</button>
     </div>
@@ -957,8 +946,7 @@ footer {
         <div class="drawer-title">Favorilerim</div>
         <div class="drawer-close" onclick="app.closeAll()">&times;</div>
     </div>
-    <div class="drawer-content" id="favContent">
-        </div>
+    <div class="drawer-content" id="favContent"></div>
 </div>
 
 <header>
@@ -983,7 +971,7 @@ footer {
 
             <div class="search-wrapper">
                 <input type="text" class="search-input" id="searchInput" placeholder="Aradığınız ürün, kategori veya marka...">
-                <button class="search-btn">
+                <button class="search-btn" aria-label="Ara">
                     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
                 </button>
             </div>
@@ -1011,8 +999,9 @@ footer {
         </div>
     </div>
 </header>
+
 <main class="container">
-    
+
     <section class="hero-section">
         <div class="hero-slider-container">
             <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&q=80&w=2000');">
@@ -1031,7 +1020,7 @@ footer {
                     <button class="btn btn-primary" onclick="document.getElementById('productsAnchor').scrollIntoView()">KEŞFET</button>
                 </div>
             </div>
-            
+
             <div class="slider-nav">
                 <div class="slider-dot active" onclick="app.setSlide(0)"></div>
                 <div class="slider-dot" onclick="app.setSlide(1)"></div>
@@ -1059,32 +1048,31 @@ footer {
     </div>
 
     <div class="page-layout" id="productsAnchor">
-        
+
         <aside class="sidebar">
             <div class="filter-section">
                 <div class="filter-title">Kategoriler</div>
-                <div class="filter-list" id="catFilterList">
-                    </div>
+                <div class="filter-list" id="catFilterList"></div>
             </div>
 
             <div class="filter-section">
                 <div class="filter-title">Fiyat Aralığı</div>
                 <div class="flex gap-sm items-center">
-                    <input type="number" class="form-control" placeholder="Min" style="padding:6px;">
+                    <input type="number" class="form-control" id="minPrice" placeholder="Min" style="padding:6px;">
                     <span>-</span>
-                    <input type="number" class="form-control" placeholder="Max" style="padding:6px;">
-                    <button class="btn btn-primary" style="padding:6px 10px;">></button>
+                    <input type="number" class="form-control" id="maxPrice" placeholder="Max" style="padding:6px;">
+                    <button class="btn btn-primary" style="padding:6px 10px;" onclick="app.applyPriceFilter()">></button>
                 </div>
             </div>
 
             <div class="filter-section">
                 <div class="filter-title">Değerlendirme Puanı</div>
                 <div class="filter-list">
-                    <div class="filter-item"><span class="checkbox-custom"></span> ★★★★☆ ve üzeri</div>
-                    <div class="filter-item"><span class="checkbox-custom"></span> ★★★☆☆ ve üzeri</div>
+                    <div class="filter-item" onclick="app.filterRating(4, this)"><span class="checkbox-custom"></span> ★★★★☆ ve üzeri</div>
+                    <div class="filter-item" onclick="app.filterRating(3, this)"><span class="checkbox-custom"></span> ★★★☆☆ ve üzeri</div>
                 </div>
             </div>
-            
+
             <button class="btn btn-outline w-full text-xs" onclick="app.resetFilters()">Filtreleri Temizle</button>
         </aside>
 
@@ -1102,11 +1090,10 @@ footer {
                 </select>
             </div>
 
-            <div class="product-grid" id="productGrid">
-                </div>
-            
+            <div class="product-grid" id="productGrid"></div>
+
             <div class="text-center" style="margin-top:40px;">
-                <button class="btn btn-outline" style="min-width:200px">Daha Fazla Göster</button>
+                <button class="btn btn-outline" style="min-width:200px" onclick="app.loadMore()">Daha Fazla Göster</button>
             </div>
         </section>
     </div>
@@ -1127,7 +1114,7 @@ footer {
                     <a href="#" class="social-btn"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
                 </div>
             </div>
-            
+
             <div class="footer-col">
                 <h5>Hızlı Menü</h5>
                 <ul class="footer-links">
@@ -1137,7 +1124,7 @@ footer {
                     <li><a href="#">Blog</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-col">
                 <h5>Kurumsal</h5>
                 <ul class="footer-links">
@@ -1148,7 +1135,7 @@ footer {
                     <li><a href="#">KVKK Aydınlatma Metni</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-col">
                 <h5>Müşteri Hizmetleri</h5>
                 <p style="color:#888; margin-bottom:10px">WhatsApp Destek Hattı</p>
@@ -1160,7 +1147,7 @@ footer {
                 </div>
             </div>
         </div>
-        
+
         <div style="border-top:1px solid #222; padding-top:20px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; color:#555; font-size:12px;">
             <div>© 2026 Baytek Collection Inc. Tüm hakları saklıdır.</div>
         </div>
@@ -1172,10 +1159,13 @@ footer {
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         <span>Anasayfa</span>
     </div>
-    <div class="mobile-nav-item" onclick="document.getElementById('searchInput').focus()">
+
+    <!-- ✅ Mobil arama artık modal açıyor -->
+    <div class="mobile-nav-item" onclick="app.openSearch()">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         <span>Ara</span>
     </div>
+
     <div class="mobile-nav-item" onclick="app.openCart()">
         <div class="relative">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
@@ -1183,6 +1173,7 @@ footer {
         </div>
         <span>Sepet</span>
     </div>
+
     <div class="mobile-nav-item" onclick="app.openFav()">
         <div class="relative">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -1190,6 +1181,7 @@ footer {
         </div>
         <span>Favoriler</span>
     </div>
+
     <div class="mobile-nav-item" onclick="app.openAuth()">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <span>Hesabım</span>
@@ -1200,19 +1192,17 @@ footer {
 /* ==========================================================================
    JAVASCRIPT APP ENGINE
    ==========================================================================
-   Includes: State Management, Data, Rendering, Interactions
 */
 
 const db = {
     products: [
-        { id: 101, name: "Kartal Figürlü LED Işıklı Su Şelalesi", price: 1250, oldPrice: 1600, cat: "decor", img: "https://i.imgur.com/aIAthmX.jpeg", rating: 4.8, isNew: true, fastShipping: true },
-        { id: 102, name: "Premium Çelik Termos Seti (3 Bardaklı)", price: 450, oldPrice: 600, cat: "drink", img: "https://i.imgur.com/wvdZXrC.jpeg", rating: 4.9, isNew: false, fastShipping: true },
-        { id: 103, name: "Mobgift USB’li Işıklı Cam Küre", price: 290, oldPrice: 350, cat: "gift", img: "https://i.imgur.com/oiAFO7w.jpeg", rating: 4.5, isNew: false, fastShipping: false },
-        { id: 104, name: "Lora Bordo Monogram Çanta", price: 550, oldPrice: 850, cat: "fashion", img: "https://i.imgur.com/1a4ScDF.jpeg", rating: 5.0, isNew: true, fastShipping: true },
-        { id: 107, name: "Motivasyonel Matara 2L", price: 300, oldPrice: 400, cat: "drink", img: "https://i.imgur.com/2en5c9l.jpeg", rating: 4.6, isNew: false, fastShipping: true }
-    ], // <-- BURADA KÖŞELİ PARANTEZ EKSİKTİ, DİZİYİ KAPATTIK
-    
-    categories: [ // <-- ÇİFT YAZILAN BOŞ CATEGORIES KISMINI SİLDİK
+        { id: 101, name: "Kartal Figürlü LED Işıklı Su Şelalesi", price: 1250, oldPrice: 1600, cat: "decor", img: "https://i.imgur.com/aIAthmX.jpeg", rating: 4.8, isNew: true, fastShipping: true, reviews: 178 },
+        { id: 102, name: "Premium Çelik Termos Seti (3 Bardaklı)", price: 450, oldPrice: 600, cat: "drink", img: "https://i.imgur.com/wvdZXrC.jpeg", rating: 4.9, isNew: false, fastShipping: true, reviews: 241 },
+        { id: 103, name: "Mobgift USB’li Işıklı Cam Küre", price: 290, oldPrice: 350, cat: "gift", img: "https://i.imgur.com/oiAFO7w.jpeg", rating: 4.5, isNew: false, fastShipping: false, reviews: 96 },
+        { id: 104, name: "Lora Bordo Monogram Çanta", price: 550, oldPrice: 850, cat: "fashion", img: "https://i.imgur.com/1a4ScDF.jpeg", rating: 5.0, isNew: true, fastShipping: true, reviews: 64 },
+        { id: 107, name: "Motivasyonel Matara 2L", price: 300, oldPrice: 400, cat: "drink", img: "https://i.imgur.com/2en5c9l.jpeg", rating: 4.6, isNew: false, fastShipping: true, reviews: 119 }
+    ],
+    categories: [
         { id: 'all', name: 'Tümü' },
         { id: 'decor', name: 'Dekorasyon' },
         { id: 'gift', name: 'Hediyelik' },
@@ -1220,7 +1210,7 @@ const db = {
         { id: 'fashion', name: 'Moda & Aksesuar' },
         { id: 'kitchen', name: 'Mutfak' }
     ]
-}; // <-- OBJEYİ TAMAMEN KAPATTIK
+};
 
 const app = {
     state: {
@@ -1228,26 +1218,103 @@ const app = {
         favorites: [],
         user: null,
         activeCategory: 'all',
-        slideIndex: 0
+        slideIndex: 0,
+        minPrice: null,
+        maxPrice: null,
+        minRating: null,
+        visibleCount: 12,
+        lastSort: 'default',
+        searchQuery: ''
     },
 
     init: function() {
-        this.renderProducts();
         this.renderCategories();
+        this.bindSearch();
         this.updateBadges();
         this.startSlider();
-        
-        // Search listener
-        document.getElementById('searchInput').addEventListener('input', (e) => this.handleSearch(e.target.value));
-        
-        console.log("Baytek App Initialized v2.0");
+        this.applyAllFiltersAndRender();
+
+        // Mobil arama input listener
+        const ms = document.getElementById('mobileSearchInput');
+        ms.addEventListener('input', (e) => {
+            this.state.searchQuery = e.target.value;
+            this.applyAllFiltersAndRender();
+        });
+
+        // ESC ile kapatma
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') this.closeAll();
+        });
+
+        console.log("Baytek App Initialized v2.1");
     },
 
-    // --- PRODUCT LOGIC ---
-    renderProducts: function(productsToRender = db.products) {
+    /* ----------------- Helpers ----------------- */
+    formatPrice: function(value) {
+        return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY', maximumFractionDigits: 0 }).format(value);
+    },
+
+    renderStars: function(rating) {
+        const full = Math.floor(rating);
+        const half = (rating - full) >= 0.5 ? 1 : 0;
+        const empty = 5 - full - half;
+
+        const fullStar = '★'.repeat(full);
+        const halfStar = half ? '⯪' : ''; // hafif half hissi (istersen '½' yaparız)
+        const emptyStar = '☆'.repeat(empty);
+        return `${fullStar}${halfStar}${emptyStar}`;
+    },
+
+    getFilteredProducts: function() {
+        let items = [...db.products];
+
+        // Category
+        if (this.state.activeCategory !== 'all') {
+            items = items.filter(p => p.cat === this.state.activeCategory);
+        }
+
+        // Search (name + category)
+        const q = (this.state.searchQuery || '').trim().toLowerCase();
+        if (q) {
+            items = items.filter(p =>
+                p.name.toLowerCase().includes(q) ||
+                p.cat.toLowerCase().includes(q)
+            );
+        }
+
+        // Price filter
+        const minP = this.state.minPrice;
+        const maxP = this.state.maxPrice;
+        if (minP !== null && !isNaN(minP)) items = items.filter(p => p.price >= minP);
+        if (maxP !== null && !isNaN(maxP)) items = items.filter(p => p.price <= maxP);
+
+        // Rating filter
+        const minR = this.state.minRating;
+        if (minR !== null && !isNaN(minR)) items = items.filter(p => p.rating >= minR);
+
+        // Sort
+        const type = this.state.lastSort;
+        switch(type) {
+            case 'price-asc': items.sort((a,b) => a.price - b.price); break;
+            case 'price-desc': items.sort((a,b) => b.price - a.price); break;
+            case 'newest': items = items.filter(p => p.isNew).concat(items.filter(p => !p.isNew)); break;
+            default: break;
+        }
+
+        return items;
+    },
+
+    applyAllFiltersAndRender: function() {
+        const all = this.getFilteredProducts();
+        const limited = all.slice(0, this.state.visibleCount);
+        this.renderProducts(limited, all.length);
+    },
+
+    /* ----------------- PRODUCT LOGIC ----------------- */
+    renderProducts: function(productsToRender, totalAfterFilter) {
         const grid = document.getElementById('productGrid');
         const countEl = document.getElementById('totalProductCount');
-        
+
         if (productsToRender.length === 0) {
             grid.innerHTML = '<div class="text-center text-muted" style="grid-column:1/-1; padding:40px;">Aradığınız kriterlere uygun ürün bulunamadı.</div>';
             countEl.innerText = 0;
@@ -1266,7 +1333,7 @@ const app = {
                     ${hasDiscount ? `<span class="badge badge-sale">%${discountRate}</span>` : ''}
                     ${p.fastShipping ? '<span class="badge badge-fast">🚀 HIZLI</span>' : ''}
                 </div>
-                <button class="card-fav-btn ${isFav ? 'active' : ''}" onclick="app.toggleFav(${p.id}, this)">
+                <button class="card-fav-btn ${isFav ? 'active' : ''}" onclick="app.toggleFav(${p.id}, this)" aria-label="Favori">
                     <svg width="18" height="18" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                 </button>
                 <div class="card-img-wrapper">
@@ -1275,20 +1342,20 @@ const app = {
                 <div class="card-content">
                     <div class="card-brand">BAYTEK COLLECTION</div>
                     <h3 class="card-title">${p.name}</h3>
-                    <div class="card-rating">
-                        ★★★★☆ <span style="color:#666">(${Math.floor(Math.random()*200)})</span>
+                    <div class="card-rating" title="${p.rating}">
+                        ${this.renderStars(p.rating)} <span style="color:#666">(${p.reviews || 0})</span>
                     </div>
                     <div class="card-price-container">
-                        <span class="card-price">${p.price} TL</span>
-                        ${hasDiscount ? `<span class="card-old-price">${p.oldPrice} TL</span>` : ''}
+                        <span class="card-price">${this.formatPrice(p.price)}</span>
+                        ${hasDiscount ? `<span class="card-old-price">${this.formatPrice(p.oldPrice)}</span>` : ''}
                     </div>
                     <button class="add-cart-overlay-btn" onclick="app.addToCart(${p.id})">SEPETE EKLE</button>
                 </div>
             </article>
             `;
         }).join('');
-        
-        countEl.innerText = productsToRender.length;
+
+        countEl.innerText = totalAfterFilter;
     },
 
     renderCategories: function() {
@@ -1300,11 +1367,19 @@ const app = {
         `).join('');
     },
 
-    // --- ACTIONS ---
+    bindSearch: function() {
+        const input = document.getElementById('searchInput');
+        input.addEventListener('input', (e) => {
+            this.state.searchQuery = e.target.value;
+            this.applyAllFiltersAndRender();
+        });
+    },
+
+    /* ----------------- ACTIONS ----------------- */
     addToCart: function(id) {
         const product = db.products.find(p => p.id === id);
         const existing = this.state.cart.find(i => i.id === id);
-        
+
         if(existing) {
             existing.qty++;
             this.toast(`${product.name} miktarı güncellendi`, 'success');
@@ -1312,7 +1387,7 @@ const app = {
             this.state.cart.push({ ...product, qty: 1 });
             this.toast('Ürün sepete eklendi', 'success');
         }
-        
+
         this.updateBadges();
         this.renderCart();
         this.openCart();
@@ -1351,11 +1426,11 @@ const app = {
         this.renderFav();
     },
 
-    // --- UI UPDATES ---
+    /* ----------------- UI UPDATES ----------------- */
     updateBadges: function() {
         const cartCount = this.state.cart.reduce((a,b) => a + b.qty, 0);
         const favCount = this.state.favorites.length;
-        
+
         ['cartBadge', 'mobileCartBadge'].forEach(id => document.getElementById(id).innerText = cartCount);
         ['favBadge', 'mobileFavBadge'].forEach(id => document.getElementById(id).innerText = favCount);
         document.getElementById('cartCountHeader').innerText = cartCount;
@@ -1364,7 +1439,7 @@ const app = {
     renderCart: function() {
         const container = document.getElementById('cartContent');
         const footer = document.getElementById('cartFooter');
-        
+
         if(this.state.cart.length === 0) {
             container.innerHTML = `
                 <div class="flex flex-col items-center justify-center h-full text-center">
@@ -1380,7 +1455,7 @@ const app = {
                 total += item.price * item.qty;
                 return `
                 <div class="cart-item">
-                    <img src="${item.img}" class="cart-item-img">
+                    <img src="${item.img}" class="cart-item-img" alt="">
                     <div class="cart-item-info">
                         <div>
                             <div class="cart-item-title">${item.name}</div>
@@ -1393,7 +1468,7 @@ const app = {
                                 <div class="qty-btn" onclick="app.changeQty(${item.id}, 1)">+</div>
                             </div>
                             <div class="text-right">
-                                <div class="cart-item-price">${item.price * item.qty} TL</div>
+                                <div class="cart-item-price">${this.formatPrice(item.price * item.qty)}</div>
                                 <div class="cart-remove-btn" onclick="app.removeFromCart(${item.id})">Sil</div>
                             </div>
                         </div>
@@ -1401,7 +1476,8 @@ const app = {
                 </div>
                 `;
             }).join('');
-            document.getElementById('cartTotal').innerText = total + " TL";
+
+            document.getElementById('cartTotal').innerText = this.formatPrice(total);
             footer.style.display = 'block';
         }
     },
@@ -1412,15 +1488,15 @@ const app = {
             container.innerHTML = '<div class="text-center text-muted" style="padding-top:50px">Favori listeniz boş.</div>';
             return;
         }
-        
+
         container.innerHTML = this.state.favorites.map(fid => {
             const p = db.products.find(x => x.id === fid);
             return `
             <div class="cart-item">
-                <img src="${p.img}" class="cart-item-img">
+                <img src="${p.img}" class="cart-item-img" alt="">
                 <div class="cart-item-info">
                     <div class="cart-item-title">${p.name}</div>
-                    <div class="cart-item-price">${p.price} TL</div>
+                    <div class="cart-item-price">${this.formatPrice(p.price)}</div>
                     <button class="btn btn-primary" style="padding:5px 10px; font-size:10px; width:fit-content; margin-top:5px;" onclick="app.addToCart(${p.id})">Sepete Ekle</button>
                 </div>
             </div>
@@ -1428,53 +1504,89 @@ const app = {
         }).join('');
     },
 
-    // --- FILTER & SORT ---
-    filterCategory: function(catId, el) {
+    /* ----------------- FILTER & SORT ----------------- */
+    filterCategory: function(catId) {
         this.state.activeCategory = catId;
-        this.renderCategories(); // Update UI active state
-        
-        let filtered = db.products;
-        if(catId !== 'all') {
-            filtered = db.products.filter(p => p.cat === catId);
-        }
-        this.renderProducts(filtered);
+        this.state.visibleCount = 12;
+        this.renderCategories();
+        this.applyAllFiltersAndRender();
     },
 
-    handleSearch: function(query) {
-        query = query.toLowerCase();
-        const filtered = db.products.filter(p => p.name.toLowerCase().includes(query) || p.cat.includes(query));
-        this.renderProducts(filtered);
+    applyPriceFilter: function() {
+        const min = Number(document.getElementById('minPrice').value);
+        const max = Number(document.getElementById('maxPrice').value);
+
+        this.state.minPrice = isNaN(min) || min === 0 ? null : min;
+        this.state.maxPrice = isNaN(max) || max === 0 ? null : max;
+
+        this.state.visibleCount = 12;
+        this.applyAllFiltersAndRender();
+        this.toast("Fiyat filtresi uygulandı", "info");
+    },
+
+    filterRating: function(minRating, el) {
+        const isActive = el.classList.contains('active');
+        document.querySelectorAll('.filter-section .filter-item').forEach(x => {
+            if (x.innerText.includes('ve üzeri') && x !== el) x.classList.remove('active');
+        });
+
+        if (isActive) {
+            el.classList.remove('active');
+            this.state.minRating = null;
+            this.toast("Puan filtresi kaldırıldı", "info");
+        } else {
+            el.classList.add('active');
+            this.state.minRating = minRating;
+            this.toast(`Puan filtresi: ${minRating}+`, "info");
+        }
+
+        this.state.visibleCount = 12;
+        this.applyAllFiltersAndRender();
     },
 
     sortProducts: function(type) {
-        let sorted = [...db.products]; // Copy
-        // Filter first if category active
-        if(this.state.activeCategory !== 'all') {
-            sorted = sorted.filter(p => p.cat === this.state.activeCategory);
-        }
-
-        switch(type) {
-            case 'price-asc': sorted.sort((a,b) => a.price - b.price); break;
-            case 'price-desc': sorted.sort((a,b) => b.price - a.price); break;
-            case 'newest': sorted = sorted.filter(p => p.isNew).concat(sorted.filter(p => !p.isNew)); break;
-            default: break; // Relevance (default ID order)
-        }
-        this.renderProducts(sorted);
+        this.state.lastSort = type;
+        this.applyAllFiltersAndRender();
     },
 
     resetFilters: function() {
         this.state.activeCategory = 'all';
+        this.state.minPrice = null;
+        this.state.maxPrice = null;
+        this.state.minRating = null;
+        this.state.visibleCount = 12;
+        this.state.lastSort = 'default';
+        this.state.searchQuery = '';
+
         document.getElementById('searchInput').value = '';
+        document.getElementById('minPrice').value = '';
+        document.getElementById('maxPrice').value = '';
+        document.getElementById('mobileSearchInput').value = '';
+
         this.renderCategories();
-        this.renderProducts(db.products);
+        this.applyAllFiltersAndRender();
         this.toast("Filtreler temizlendi", 'info');
     },
 
-    // --- AUTHENTICATION ---
+    loadMore: function() {
+        this.state.visibleCount += 12;
+        this.applyAllFiltersAndRender();
+        this.toast("Daha fazla ürün yüklendi", "success");
+    },
+
+    clearSearch: function() {
+        this.state.searchQuery = '';
+        document.getElementById('searchInput').value = '';
+        document.getElementById('mobileSearchInput').value = '';
+        this.state.visibleCount = 12;
+        this.applyAllFiltersAndRender();
+        this.toast("Arama temizlendi", "info");
+    },
+
+    /* ----------------- AUTH ----------------- */
     handleLogin: function(e) {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
-        // Mock API
         if(email.length > 5) {
             this.state.user = { name: "Kerim B.", email: email };
             document.getElementById('userNameDisplay').innerText = "Kerim B.";
@@ -1493,7 +1605,7 @@ const app = {
     switchAuth: function(type) {
         const tabs = document.querySelectorAll('.auth-tab');
         tabs.forEach(t => t.classList.remove('active'));
-        
+
         if(type === 'login') {
             tabs[0].classList.add('active');
             document.getElementById('loginForm').classList.remove('hidden');
@@ -1505,49 +1617,67 @@ const app = {
         }
     },
 
-    // --- DRAWER CONTROLS ---
+    /* ----------------- DRAWER & MODAL CONTROLS ----------------- */
     openCart: function() {
         this.closeAll();
         document.getElementById('globalOverlay').classList.add('active');
         document.getElementById('cartDrawer').classList.add('open');
     },
+
     openFav: function() {
         this.closeAll();
         this.renderFav();
         document.getElementById('globalOverlay').classList.add('active');
         document.getElementById('favDrawer').classList.add('open');
     },
+
     openAuth: function() {
-        if(this.state.user) return; // Already logged in
+        if(this.state.user) return;
         this.closeAll();
         document.getElementById('globalOverlay').classList.add('active');
         document.getElementById('authModal').classList.add('active');
     },
+
+    openSearch: function() {
+        this.closeAll();
+        document.getElementById('globalOverlay').classList.add('active');
+        document.getElementById('searchModal').classList.add('active');
+        setTimeout(() => document.getElementById('mobileSearchInput').focus(), 50);
+    },
+
     closeAll: function() {
         document.getElementById('globalOverlay').classList.remove('active');
         document.getElementById('cartDrawer').classList.remove('open');
         document.getElementById('favDrawer').classList.remove('open');
         document.getElementById('authModal').classList.remove('active');
+        document.getElementById('searchModal').classList.remove('active');
     },
 
-    // --- UTILS ---
+    /* ----------------- UTILS ----------------- */
     toast: function(msg, type = 'success') {
         const container = document.getElementById('toastArea');
         const el = document.createElement('div');
         el.className = `toast ${type}`;
-        
-        const icon = type === 'success' 
+
+        const icon = type === 'success'
             ? '<svg width="20" height="20" fill="var(--status-success)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'
-            : '<svg width="20" height="20" fill="var(--status-info)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
+            : (type === 'error'
+                ? '<svg width="20" height="20" fill="var(--status-error)" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm4.3 13.3L15.3 16.3 12 13l-3.3 3.3-1-1L11 12 7.7 8.7l1-1L12 11l3.3-3.3 1 1L13 12z"/></svg>'
+                : '<svg width="20" height="20" fill="var(--status-info)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'
+            );
+
+        const head =
+            type === 'success' ? 'Başarılı' :
+            type === 'error' ? 'Hata' : 'Bilgi';
 
         el.innerHTML = `
             ${icon}
             <div class="toast-content">
-                <h4>${type === 'success' ? 'Başarılı' : 'Bilgi'}</h4>
+                <h4>${head}</h4>
                 <p>${msg}</p>
             </div>
         `;
-        
+
         container.appendChild(el);
         setTimeout(() => {
             el.style.animation = 'fadeOutRight 0.3s forwards';
@@ -1555,7 +1685,7 @@ const app = {
         }, 3000);
     },
 
-    // --- SLIDER LOGIC ---
+    /* ----------------- SLIDER ----------------- */
     startSlider: function() {
         setInterval(() => {
             this.state.slideIndex = (this.state.slideIndex + 1) % 2;
@@ -1567,20 +1697,18 @@ const app = {
         this.state.slideIndex = index;
         const slides = document.querySelectorAll('.hero-slide');
         const dots = document.querySelectorAll('.slider-dot');
-        
+
         slides.forEach(s => s.classList.remove('active'));
         dots.forEach(d => d.classList.remove('active'));
-        
+
         slides[index].classList.add('active');
         dots[index].classList.add('active');
     }
 };
 
-// Start App
 document.addEventListener('DOMContentLoaded', () => {
     app.init();
 });
-
 </script>
 </body>
 </html>
